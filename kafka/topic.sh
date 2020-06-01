@@ -1,0 +1,1 @@
+kafka-topics.sh --create --zookeeper z-2.kafka-public.f24lff.c2.kafka.ap-northeast-2.amazonaws.com:2181,z-1.kafka-public.f24lff.c2.kafka.ap-northeast-2.amazonaws.com:2181,z-3.kafka-public.f24lff.c2.kafka.ap-northeast-2.amazonaws.com:2181 --replication-factor 3 --partitions 1 --topic ocktank

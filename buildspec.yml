@@ -1,0 +1,26 @@
+version: 0.2
+
+##run-as: ec2-user
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn test
+      - mvn package
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - tar cvf deploy.tar appspec.yml scripts/before_install.sh scripts/after_install.sh target/mbp-0.0.1-SNAPSHOT.jar
+
+artifacts:
+  files:
+    - target/mbp-0.0.1-SNAPSHOT.jar
+    - scripts/before_install.sh
+    - scripts/after_install.sh
+    - appspec.yml
+    - deploy.tar
+  discard-paths: no
