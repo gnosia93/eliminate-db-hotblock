@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.amazon</groupId>
-	<artifactId>mbp</artifactId>
+	<artifactId>demo-cache</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mbp</name>
+	<packaging>jar</packaging>
+	<name>demo-cache</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

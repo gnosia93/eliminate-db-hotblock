@@ -67,9 +67,8 @@ public class OrderService {
                 .build();
 
         Order savedOrder = orderRepository.save(newOrder);
-        kafkaTemplate.send(KAFKA_TOPIC, savedOrder.toOrderMessage());
 
-
+        //kafkaTemplate.send(KAFKA_TOPIC, savedOrder.toOrderMessage());
         //messagingTemplate.convertAndSend(SQS_TOPIC, "this is test..");
 
 
