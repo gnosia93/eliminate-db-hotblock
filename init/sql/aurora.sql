@@ -3,10 +3,9 @@ create database shop CHARACTER SET utf8 COLLATE utf8_general_ci;
 use shop;
 
 drop user if exists demo;
-create user 'demo'@'%' identified by 'demo';
-alter user 'demo'@'%' identified with mysql_native_password by 'demo';
+create user 'demo'@'%' identified by 'demo12345';
+alter user 'demo'@'%' identified with mysql_native_password by 'demo12345';
 grant all privileges on shop.* to 'demo'@'%';
-GRANT EXECUTE ON PROCEDURE mysql.lambda_async TO 'demo'@'%';
 
 flush privileges;
 
