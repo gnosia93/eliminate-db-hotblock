@@ -86,8 +86,10 @@ BEGIN
     DECLARE v_image_url       VARCHAR(300);
     DECLARE v_random          INT;
 
+/*
     DECLARE M_ERR INT DEFAULT 0;    
     DECLARE CONTINUE HANDLER for SQLEXCEPTION SET M_ERR = -1;
+*/
 
     START TRANSACTION;
     loop_label:  LOOP
@@ -114,12 +116,12 @@ BEGIN
                       v_delivery_type,
                       v_image_url);
       
+/*					   
             IF M_ERR < 0 THEN         
-               /* console output here */
-	       SELECT '[Error] Record Insert Error Found';
+               SELECT '[Error] Record Insert Error Found';
                SET M_ERR = 0;                            
             END IF;
-                                
+*/                                
         END;
                                            
         IF MOD(v_cnt, 1000) = 0 THEN
