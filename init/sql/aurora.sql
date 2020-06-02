@@ -86,10 +86,9 @@ BEGIN
     DECLARE v_image_url       VARCHAR(300);
     DECLARE v_random          INT;
 
-/*
     DECLARE M_ERR INT DEFAULT 0;    
     DECLARE CONTINUE HANDLER for SQLEXCEPTION SET M_ERR = -1;
-*/
+
 
     START TRANSACTION;
     loop_label:  LOOP
@@ -98,7 +97,7 @@ BEGIN
 
         BEGIN 
             SET v_price = (MOD(v_cnt, 10) + 1) * 1000;
-            select round(dbms_random.value(1,10)) into v_random;
+            select round(RAND() * 10) into v_random;
             
             IF v_random = 1 THEN
                 SET v_delivery_type = 'Free';
@@ -116,12 +115,10 @@ BEGIN
                       v_delivery_type,
                       v_image_url);
       
-/*					   
             IF M_ERR < 0 THEN         
                SELECT '[Error] Record Insert Error Found';
                SET M_ERR = 0;                            
             END IF;
-*/                                
         END;
                                            
         IF MOD(v_cnt, 1000) = 0 THEN
