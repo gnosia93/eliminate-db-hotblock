@@ -87,6 +87,7 @@ BEGIN
     DECLARE M_ERR INT DEFAULT 0;    
     DECLARE CONTINUE HANDLER for SQLEXCEPTION SET M_ERR = -1;
 
+    START TRANSACTION;
     loop_label:  LOOP
         SET v_cnt = v_cnt + 1;
         
@@ -120,6 +121,7 @@ BEGIN
                                            
         IF MOD(v_cnt, 1000) = 0 THEN
             COMMIT;
+	    START TRANSACTION;		
         END IF;
         
         IF v_cnt >= rowcnt THEN 
