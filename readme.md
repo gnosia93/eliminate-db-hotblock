@@ -17,6 +17,7 @@ java language, you can easily catch up with details.
 
 ### ElastiCache Briefs ###
 
+Before diving deeply, I want to just introduce about AWS elastiCache for your understanding about this article.
 
 ### Architecture ###
 
