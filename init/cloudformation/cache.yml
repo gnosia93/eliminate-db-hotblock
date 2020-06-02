@@ -1,0 +1,411 @@
+Description:  This template deploys a VPC, with a pair of public and private subnets spread
+  across two Availability Zones. It deploys an internet gateway, with a default
+  route on the public subnets. 
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+    Default: demo
+
+  VpcCIDR:
+    Description: Please enter the IP range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.192.0.0/16
+
+  CacheNodeType:
+    Description: The instance type the nodes will launch under.
+    Type: String
+    Default: cache.m3.medium
+    AllowedValues:
+      - cache.t2.micro
+      - cache.t2.small
+      - cache.t2.medium
+      - cache.m3.medium
+      - cache.m3.large
+      - cache.m3.xlarge
+      - cache.m3.2xlarge
+      - cache.r3.large
+      - cache.r3.xlarge
+      - cache.r3.2xlarge
+      - cache.r3.4xlarge
+      - cache.r3.8xlarge
+
+Mappings: 
+  RegionMap: 
+    us-east-1: 
+      "HVM64": "ami-09d95fab7fff3776c"
+    us-east-2: 
+      "HVM64": "ami-026dea5602e368e96"
+    us-west-1: 
+      "HVM64": "ami-04e59c05167ea7bd5"
+    us-west-2: 
+      "HVM64": "ami-0e34e7b9ca0ace12d"
+      
+    ap-southeast-1: 
+      "HVM64": "ami-0615132a0f36d24f4"
+    ap-southeast-2: 
+      "HVM64": "ami-088ff0e3bde7b3fdf"
+    ap-northeast-1: 
+      "HVM64": "ami-0a1c2ec61571737db"  
+    ap-northeast-2: 
+      "HVM64": "ami-01af223aa7f274198"  
+    
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+#      CidrBlock: !Ref PublicSubnet1CIDR
+      CidrBlock: !Select [ 0, !Cidr [ !Ref VpcCIDR, 4, 8 ]]         
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet (AZ1)
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+#      CidrBlock: !Ref PublicSubnet2CIDR
+      CidrBlock: !Select [ 1, !Cidr [ !Ref VpcCIDR, 4, 8 ]]         
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet (AZ2)
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
+#      CidrBlock: !Ref PrivateSubnet1CIDR
+      CidrBlock: !Select [ 2, !Cidr [ !Ref VpcCIDR, 4, 8 ]]         
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet (AZ1)
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+#      CidrBlock: !Ref PrivateSubnet2CIDR
+      CidrBlock: !Select [ 3, !Cidr [ !Ref VpcCIDR, 4, 8 ]]         
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet (AZ2)
+
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Routes
+
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet1
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet2
+
+
+
+### create EC2 / ALB
+
+  ALBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "alb-sg"
+      GroupDescription: "Security group with alb ingress rule"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "web-sg"
+      GroupDescription: "Security group with web ingress rule"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      
+  WebInstance1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.nano
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
+      KeyName: keypair-tokyo
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      SubnetId: !Ref PublicSubnet1
+      UserData:
+        Fn::Base64:
+          Fn::Sub: |
+            #!/bin/bash 
+            sudo yum install -y java-1.8.0-openjdk
+            sudo yum install -y java-1.8.0-openjdk-devel
+            sudo yum install -y git
+            sudo yum install -y maven
+            sudo yum install -y telnet
+            sudo yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+            sudo yum install -y mysql-community-client
+            sudo -u ec2-user git clone https://github.com/gnosia93/demo-cache.git
+            
+    
+  WebInstance2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.nano
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
+      KeyName: keypair-tokyo
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      SubnetId: !Ref PublicSubnet2
+      UserData:
+        Fn::Base64:
+          Fn::Sub: |
+            #!/bin/bash 
+            sudo yum install -y java-1.8.0-openjdk
+            sudo yum install -y java-1.8.0-openjdk-devel
+            sudo yum install -y git
+            sudo yum install -y maven
+            sudo yum install -y telnet
+            sudo yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+            sudo yum install -y mysql-community-client
+            sudo -u ec2-user git clone https://github.com/gnosia93/demo-cache.git
+            
+  
+  WebAppALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      IpAddressType: ipv4
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref ALBSecurityGroup
+      Subnets:
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+      Tags:
+        - Key: Name
+          Value: WebAppALB
+          
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn:
+            Ref: WebAppTargetGroup
+      LoadBalancerArn:
+        Ref: WebAppALB
+      Port: 8080
+      Protocol: HTTP      
+
+  WebAppTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Join [ '-', [ !Ref EnvironmentName, 'tg' ] ]
+      Port: 8080
+      Protocol: 'HTTP'
+      VpcId: !Ref VPC
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: 8080
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Targets:
+        - Id: !Ref WebInstance1
+        - Id: !Ref WebInstance2
+      Tags:
+        - Key: Name
+          Value: WebAppTargetGroup
+          
+
+## create database
+
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for Aurora Database
+      SubnetIds:
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
+    
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "db-sg"
+      GroupDescription: "Security group with db ingress rule"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !Ref VpcCIDR
+    
+
+  AuroraCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      Engine: aurora
+      DBClusterIdentifier: !Join [ '-', [ !Ref EnvironmentName, 'db' ] ]
+      DatabaseName: demo
+      MasterUsername: demo
+      MasterUserPassword: demo1234
+#      BackupRetentionPeriod: !FindInMap [!Ref "AWS::AccountId", !Ref "AWS::Region", "BackupRetentionPeriod"]
+#      PreferredBackupWindow: 01:00-02:00
+#      PreferredMaintenanceWindow: mon:03:00-mon:04:00
+      DBSubnetGroupName: !Ref "DBSubnetGroup"
+      VpcSecurityGroupIds: 
+        - !Ref DBSecurityGroup
+
+
+  DatabasePrimaryInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: aurora
+      DBClusterIdentifier: !Ref "AuroraCluster"
+      DBInstanceClass: "db.r5.large"
+      DBSubnetGroupName: !Ref "DBSubnetGroup"    
+
+
+
+### create elasticache redis
+
+  CacheSubnetGroup:
+    Type: 'AWS::ElastiCache::SubnetGroup'
+    Properties:
+      Description: Subnet Group for Cache Replication Group
+      SubnetIds:
+        - !Ref PrivateSubnet1
+        - !Ref PrivateSubnet2
+
+  CacheSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "cache-sg"
+      GroupDescription: "Security group with cache ingress rule"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 6379
+          ToPort: 6379
+          CidrIp: !Ref VpcCIDR
+
+  ReplicationGroup:
+    Type: 'AWS::ElastiCache::ReplicationGroup'
+    Properties:
+      ReplicationGroupId: !Join [ '-', [ !Ref EnvironmentName, 'cache' ] ]
+      ReplicationGroupDescription: "elasticache for redis"
+      AutomaticFailoverEnabled: true
+      CacheNodeType: !Ref CacheNodeType
+      CacheSubnetGroupName: !Ref CacheSubnetGroup
+      Engine: redis
+      NumCacheClusters: 2
+      Port: 6379
+#      PreferredMaintenanceWindow: !Ref PreferredMaintenanceWindow
+#      ReplicationGroupDescription: !Ref ReplicationGroupDescription
+      SecurityGroupIds:
+        - !Ref CacheSecurityGroup 
+#      SnapshotRetentionLimit: !Ref SnapshotRetentionLimit
+#      SnapshotWindow: !Ref SnapshotWindow
+    
+    
+              
+     
+##      AWSTemplateFormatVersion: "2010-09-09"  
+##Resources:  
+#  WebInstance:
+#    Type: AWS::EC2::Instance
+#    Properties:
+#      InstanceType: t2.nano
+#      ImageId: ami-80861296
+#      KeyName: keypair-tokyo
+#      SecurityGroupIds:
+#        - !Ref WebSecurityGroup
+#      SubnetId: !Ref PublicSubnet1
+      
+
+Outputs:
+  VPC:
+    Description: A reference to the created VPC
+    Value: !Ref VPC
+
+  PublicSubnets:
+    Description: A list of the public subnets
+    Value: !Join [ ", ", [ !Ref PublicSubnet1, !Ref PublicSubnet2 ]]
+
+  PrivateSubnets:
+    Description: A list of the private subnets
+    Value: !Join [ ", ", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
+    
+  ALB:
+    Description: A list of the private subnets
+    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '-' ]]
+    
+  AuroraCluster:
+    Description: A reference to the created aurora
+    Value: !Join [ ":", [ !GetAtt AuroraCluster.Endpoint.Address,  !GetAtt AuroraCluster.Endpoint.Port ]]
+  
+  Redis:
+    Description: A reference to the created redis
+    Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ]]
+  
+    
