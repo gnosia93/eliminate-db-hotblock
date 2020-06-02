@@ -37,7 +37,7 @@ and you need to confirm product table's row count is 10000.
 If you are good at MySQL database and compatibles, you can login auroa RDS using mysql client and check sample schema,
 auto generated datas.
 
-check and refer information in create-schame.sql file for login. 
+(optional) check and refer information in create-schame.sql file for login. 
 
 ```
 $ cd /home/ec2-user/demo-cache/init/sql
