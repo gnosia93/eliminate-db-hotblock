@@ -2,12 +2,14 @@ drop database if exists shop;
 create database shop CHARACTER SET utf8 COLLATE utf8_general_ci;
 use shop;
 
+/*
 drop user if exists demo;
 create user 'demo'@'%' identified by 'demo12345';
 alter user 'demo'@'%' identified with mysql_native_password by 'demo12345';
 grant all privileges on shop.* to 'demo'@'%';
 
 flush privileges;
+*/
 
 drop table if exists shop.product;
 create table shop.product 
