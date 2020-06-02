@@ -5,6 +5,12 @@
 - Session Store
 - Eliminating DB Hot Blocks when heavy transcation occurs in small range of data. 
 
+In this blog, We are going to go through how to eliminate database hotblock with amazon elasticache redis and
+java springboot web application.
+
+We don't deal with application implementation details in here, but If you are either developer or someone who can read
+java language, you can esayly catch up with implementation.
+
 
 ### Business Problems ###
 
