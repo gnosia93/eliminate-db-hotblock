@@ -28,6 +28,27 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 - cloudformation 
 
 
+
+### DB Setup ###
+
+Next step is to create schema objects and initialize tables. please execute command like below at ec2 instance console,
+and you need to confirm product table's row count is 10000. 
+
+```
+$ cd /home/ec2-user/demo-cache/init/sql
+$ sh create-schema.sh 
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
++-----------------+
+| gen_product_cnt |
++-----------------+
+|           10000 |
++-----------------+
+```
+
+
+
+
 ### Application Setup ###
 
 
