@@ -1,6 +1,9 @@
 
 # Improving Appication Performance with AWS ElastiCache #
-# Eliminating DB Hot Blocks with AWS ElastiCache #
+
+- Eliminating DB Hot Blocks with AWS ElastiCache 
+- DB Result Caching
+- Session
 
 ### Business Problems ###
 
