@@ -23,13 +23,13 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 
 
-### Infra Setup ###
+### Infra Provisioning ###
 
 - cloudformation 
 
 
 
-### DB Setup ###
+### Preparing Sample DB ###
 
 Next step is to create schema objects and initialize tables. please execute command like below at ec2 instance console,
 and you need to confirm product table's row count is 10000. 
