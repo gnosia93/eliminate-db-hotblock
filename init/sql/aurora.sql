@@ -9,8 +9,8 @@ grant all privileges on shop.* to 'demo'@'%';
 
 flush privileges;
 
-drop table if exists product;
-create table product 
+drop table if exists shop.product;
+create table shop.product 
 (
    product_id         int not null auto_increment,
    name               varchar(100) not null,
@@ -24,14 +24,14 @@ create table product
    primary key(product_id)
 );
 
-insert into product (name, price, delivery_type) values('청바지1', 100, 'Free');
-insert into product (name, price, delivery_type) values('청바지2', 200, 'Free');
-insert into product (name, price, delivery_type) values('청바지3', 300, 'Free');
+insert into shop.product (name, price, delivery_type) values('청바지1', 100, 'Free');
+insert into shop.product (name, price, delivery_type) values('청바지2', 200, 'Free');
+insert into shop.product (name, price, delivery_type) values('청바지3', 300, 'Free');
 commit;
 
 
-drop table if exists `order`;
-create table `order`
+drop table if exists `shop.order`;
+create table `shop.order`
 (
    order_id                int not null auto_increment,
    product_id              int not null,
@@ -44,7 +44,7 @@ create table `order`
    primary key(order_id)
 );
 
-insert into `order`(product_id, order_price, pay_status) values(1, 1000, 'Queued');
+insert into `shop.order`(product_id, order_price, pay_status) values(1, 1000, 'Queued');
 commit;
 
 
