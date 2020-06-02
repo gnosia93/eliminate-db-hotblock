@@ -26,11 +26,12 @@ create table shop.product
    primary key(product_id)
 );
 
+/*
 insert into shop.product (name, price, delivery_type) values('청바지1', 100, 'Free');
 insert into shop.product (name, price, delivery_type) values('청바지2', 200, 'Free');
 insert into shop.product (name, price, delivery_type) values('청바지3', 300, 'Free');
 commit;
-
+*/
 
 drop table if exists `shop.order`;
 create table `shop.order`
@@ -46,9 +47,10 @@ create table `shop.order`
    primary key(order_id)
 );
 
+/*
 insert into `shop.order`(product_id, order_price, pay_status) values(1, 1000, 'Queued');
 commit;
-
+*/
 
 /*
 DROP TRIGGER if exists after_order_insert;
@@ -106,7 +108,7 @@ BEGIN
             
             INSERT INTO shop.product(name, price, description, delivery_type, image_url) 
                 VALUES( 
-                      CONCAT('ocktank 청바지', LAST_INSERT_ID()),   
+                      CONCAT('ocktank 청바지', LAST_INSERT_ID() + 1),   
                       v_price, 
                       '청바지 전문!!!',
                       v_delivery_type,
@@ -114,7 +116,8 @@ BEGIN
       
             IF M_ERR < 0 THEN         
                /* console output here */
-               SET M_ERR = 0                            
+	       SELECT '[Error] Record Insert Error Found';
+               SET M_ERR = 0;                            
             END IF;
                                 
         END;
