@@ -92,16 +92,16 @@ BEGIN
         
 
         BEGIN 
-            v_price := (MOD(v_cnt, 10) + 1) * 1000;
+            SET v_price = (MOD(v_cnt, 10) + 1) * 1000;
             select round(dbms_random.value(1,10)) into v_random;
             
             IF v_random = 1 THEN
-                v_delivery_type := 'Free';
+                SET v_delivery_type = 'Free';
             ELSE
-                v_delivery_type := 'Charged';
+                SET v_delivery_type = 'Charged';
             END IF;
             
-            v_image_url := 'https://ocktank-prod-image.s3.ap-northeast-2.amazonaws.com/jeans/jean-' || v_random || '.png';
+            SET v_image_url = CONCAT('https://ocktank-prod-image.s3.ap-northeast-2.amazonaws.com/jeans/jean-', v_random, '.png');
             
             INSERT INTO shop.product(name, price, description, delivery_type, image_url) 
                 VALUES( 
@@ -113,7 +113,7 @@ BEGIN
       
             IF M_ERR < 0 THEN         
                // console output
-               M_ERR := 0                            
+               SET M_ERR = 0                            
             END IF;
                                 
         END;
@@ -123,8 +123,8 @@ BEGIN
         END IF;
         
         IF v_cnt >= rowcnt THEN 
-			   LEAVE  loop_label;
-		  END  IF;
+	    LEAVE  loop_label;
+	END  IF;
                                            
                                            
     END LOOP;
