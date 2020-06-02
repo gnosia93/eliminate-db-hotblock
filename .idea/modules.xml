@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mbp.iml" filepath="$PROJECT_DIR$/mbp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-cache.iml" filepath="$PROJECT_DIR$/demo-cache.iml" />
     </modules>
   </component>
 </project>
