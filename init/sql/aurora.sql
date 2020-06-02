@@ -136,7 +136,7 @@ BEGIN
 END$$ 
 DELIMITER ;
 
-CALL shop.load_data(10)
+CALL shop.load_data(10000)
 
 
 
