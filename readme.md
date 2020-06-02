@@ -9,7 +9,7 @@ In this blog, We are going to go through how to eliminate database hotblock with
 java springboot web application.
 
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
-java language, you can esayly catch up with implementation.
+java language, you can easily catch up with details.
 
 
 ### Business Problems ###
