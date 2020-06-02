@@ -49,6 +49,7 @@ insert into `order`(product_id, order_price, pay_status) values(1, 1000, 'Queued
 commit;
 
 
+/*
 DROP TRIGGER if exists after_order_insert;
 
 DELIMITER $$
@@ -67,26 +68,31 @@ BEGIN
 
 END$$ 
 DELIMITER ;
+*/
 
 
+DROP PROCEDURE if exists shop.load_data;
 
-DROP PROCEDURE SHOP.LOAD_DATA;
-CREATE OR REPLACE PROCEDURE SHOP.LOAD_DATA(rowcnt IN NUMBER)
-IS
-    v_cnt NUMBER := 0;
-    v_price NUMBER := 0;
-    v_delivery_cd NUMBER := 0;
-    v_delivery_type VARCHAR2(10);
-    v_image_url VARCHAR2(300);
-    v_random int;
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE shop.load_data(IN rowcnt INT)
 BEGIN
-    
-    LOOP
+    DECLARE v_cnt             INT DEFAULT 0;
+    DECLARE v_price           INT DEFAULT 0;
+    DECLARE v_delivery_cd     INT DEFAULT 0;
+    DECLARE v_delivery_type   VARCHAR(10);
+    DECLARE v_image_url       VARCHAR(300);
+    DECLARE v_random          INT;
+
+    DECLARE M_ERR INT DEFAULT 0;    
+    DECLARE CONTINUE HANDLER for SQLEXCEPTION SET M_ERR = -1;
+
+    loop_label:  LOOP
         v_cnt := v_cnt + 1;
         
+
         BEGIN 
             v_price := (MOD(v_cnt, 10) + 1) * 1000;
-            select round(dbms_random.value(1,10)) into v_random from dual;
+            select round(dbms_random.value(1,10)) into v_random;
             
             IF v_random = 1 THEN
                 v_delivery_type := 'Free';
@@ -96,30 +102,36 @@ BEGIN
             
             v_image_url := 'https://ocktank-prod-image.s3.ap-northeast-2.amazonaws.com/jeans/jean-' || v_random || '.png';
             
-            INSERT INTO SHOP.PRODUCT(product_id, name, price, description, delivery_type, image_url) 
-                VALUES(SHOP.seq_product_product_id.nextval, 
-                      'ocktank 청바지' || SHOP.seq_product_product_id.currval, 
+            INSERT INTO shop.product(name, price, description, delivery_type, image_url) 
+                VALUES( 
+                      'ocktank 청바지' || SHOP.seq_product_product_id.currval,   // autoincrement 값 패치?
                       v_price, 
                       '청바지 전문!!!',
                       v_delivery_type,
                       v_image_url);
-        EXCEPTION
-        WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE('Exception ..'); 
+      
+            IF M_ERR < 0 THEN         
+               // console output
+               M_ERR := 0                            
+            END IF;
+                                
         END;
-           
+                                           
         IF MOD(v_cnt, 1000) = 0 THEN
             COMMIT;
         END IF;
         
-        EXIT WHEN v_cnt >= rowcnt;
-        
+        IF v_cnt >= rowcnt THEN 
+			   LEAVE  loop_label;
+		  END  IF;
+                                           
+                                           
     END LOOP;
     COMMIT;
-END;
-/
+END$$ 
+DELIMITER ;
 
-exec SHOP.LOAD_DATA(10)
+CALL shop.load_data(10)
 
 
 
