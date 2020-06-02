@@ -1,5 +1,5 @@
 
-# Improving Appication throughput with AWS ElastiCache #
+# Improving Appication Performance with AWS ElastiCache #
 # Eliminating DB Hot Blocks with AWS ElastiCache #
 
 ### Business Problems ###
