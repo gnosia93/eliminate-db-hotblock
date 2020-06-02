@@ -5,19 +5,20 @@
 ### Business Problems ###
 
 
+### ElastiCache Briefs ###
+
+
 ### Architecture ###
 
 
-### ElastiCache Introduction ###
 
-
-
-### Environment Setup ###
+### Infra Setup ###
 
 - cloudformation 
 
 
-### Configure Connection ###
+### Application Setup ###
+
 
 
 ### App Execution ###
@@ -28,9 +29,10 @@ $ java -Dspring.profiles.active=prod -Dserver.port=8080 -jar democache-0.0.1-SNA
 ```
 
 
-### BenchMarking ###
+### BenchMark ###
 
 - AB
 - Performance Graph
+
 
 ### Pricing ###
