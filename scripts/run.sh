@@ -1,4 +1,9 @@
 #!/bin/bash
 
-nohup java -Dspring.profiles.active=prod --server.port=8080 -jar ../target/democache-0.0.1-SNAPSHOT.jar 2&> run.out
+APP_HOME=/home/ec2-user/demo-cache
+echo $APP_HOME
+nohup java -Dspring.profiles.active=prod \
+-jar $APP_HOME/target/mbp-0.0.1-SNAPSHOT.jar \
+--server.port=8080 > /home/ec2-user/tomcat.log 2>&1 &
+
 
