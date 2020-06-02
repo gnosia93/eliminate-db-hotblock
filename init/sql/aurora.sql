@@ -67,3 +67,65 @@ BEGIN
 
 END$$ 
 DELIMITER ;
+
+
+
+DROP PROCEDURE SHOP.LOAD_DATA;
+CREATE OR REPLACE PROCEDURE SHOP.LOAD_DATA(rowcnt IN NUMBER)
+IS
+    v_cnt NUMBER := 0;
+    v_price NUMBER := 0;
+    v_delivery_cd NUMBER := 0;
+    v_delivery_type VARCHAR2(10);
+    v_image_url VARCHAR2(300);
+    v_random int;
+BEGIN
+    
+    LOOP
+        v_cnt := v_cnt + 1;
+        
+        BEGIN 
+            v_price := (MOD(v_cnt, 10) + 1) * 1000;
+            select round(dbms_random.value(1,10)) into v_random from dual;
+            
+            IF v_random = 1 THEN
+                v_delivery_type := 'Free';
+            ELSE
+                v_delivery_type := 'Charged';
+            END IF;
+            
+            v_image_url := 'https://ocktank-prod-image.s3.ap-northeast-2.amazonaws.com/jeans/jean-' || v_random || '.png';
+            
+            INSERT INTO SHOP.PRODUCT(product_id, name, price, description, delivery_type, image_url) 
+                VALUES(SHOP.seq_product_product_id.nextval, 
+                      'ocktank 청바지' || SHOP.seq_product_product_id.currval, 
+                      v_price, 
+                      '청바지 전문!!!',
+                      v_delivery_type,
+                      v_image_url);
+        EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Exception ..'); 
+        END;
+           
+        IF MOD(v_cnt, 1000) = 0 THEN
+            COMMIT;
+        END IF;
+        
+        EXIT WHEN v_cnt >= rowcnt;
+        
+    END LOOP;
+    COMMIT;
+END;
+/
+
+exec SHOP.LOAD_DATA(10)
+
+
+
+
+
+
+
+
+
