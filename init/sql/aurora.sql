@@ -75,7 +75,7 @@ DELIMITER ;
 DROP PROCEDURE if exists shop.load_data;
 
 DELIMITER $$
-CREATE OR REPLACE PROCEDURE shop.load_data(IN rowcnt INT)
+CREATE PROCEDURE shop.load_data(IN rowcnt INT)
 BEGIN
     DECLARE v_cnt             INT DEFAULT 0;
     DECLARE v_price           INT DEFAULT 0;
