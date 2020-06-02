@@ -105,7 +105,7 @@ BEGIN
             
             INSERT INTO shop.product(name, price, description, delivery_type, image_url) 
                 VALUES( 
-                      'ocktank 청바지' || SHOP.seq_product_product_id.currval,   // autoincrement 값 패치?
+                      CONCAT('ocktank 청바지', LAST_INSERT_ID()),   
                       v_price, 
                       '청바지 전문!!!',
                       v_delivery_type,
