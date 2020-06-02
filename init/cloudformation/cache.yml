@@ -13,6 +13,25 @@ Parameters:
     Type: String
     Default: 10.192.0.0/16
 
+  KeyPair: 
+    Description: Amazon EC2 Key Pair
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: keypair-tokyo
+
+  WebNodeType:
+    Description: The instance type the nodes will launch under.
+    Type: String
+    Default: m5d.large
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - m5d.large
+      - m5d.xlarge
+      - m5d.2xlarge
+      - m5d.4xlarge
+      - m5d.8xlarge
+    
   CacheNodeType:
     Description: The instance type the nodes will launch under.
     Type: String
@@ -168,6 +187,11 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+          
 
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -181,6 +205,10 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0  
+        - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
@@ -188,11 +216,12 @@ Resources:
   WebInstance1:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.nano
+      InstanceType: !Ref WebNodeType
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
-      KeyName: keypair-tokyo
+      KeyName: !Ref KeyPair
       SecurityGroupIds:
         - !Ref WebSecurityGroup
+        - !Ref ALBSecurityGroup
       SubnetId: !Ref PublicSubnet1
       UserData:
         Fn::Base64:
@@ -211,11 +240,12 @@ Resources:
   WebInstance2:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.nano
+      InstanceType: !Ref WebNodeType
       ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
-      KeyName: keypair-tokyo
+      KeyName: !Ref KeyPair
       SecurityGroupIds:
         - !Ref WebSecurityGroup
+        - !Ref ALBSecurityGroup
       SubnetId: !Ref PublicSubnet2
       UserData:
         Fn::Base64:
@@ -306,9 +336,9 @@ Resources:
     Properties:
       Engine: aurora
       DBClusterIdentifier: !Join [ '-', [ !Ref EnvironmentName, 'db' ] ]
-      DatabaseName: demo
+      DatabaseName: shop
       MasterUsername: demo
-      MasterUserPassword: demo1234
+      MasterUserPassword: demo12345
 #      BackupRetentionPeriod: !FindInMap [!Ref "AWS::AccountId", !Ref "AWS::Region", "BackupRetentionPeriod"]
 #      PreferredBackupWindow: 01:00-02:00
 #      PreferredMaintenanceWindow: mon:03:00-mon:04:00
@@ -407,5 +437,3 @@ Outputs:
   Redis:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ]]
-  
-    
