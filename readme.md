@@ -1,4 +1,4 @@
-# Eliminating Database Hot Blocks using AWS ElastiCache #
+# Eliminating DB Hot Blocks with AWS ElastiCache #
 
 ## Business Problems ##
 
