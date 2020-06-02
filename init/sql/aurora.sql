@@ -112,7 +112,7 @@ BEGIN
                       v_image_url);
       
             IF M_ERR < 0 THEN         
-               // console output
+               /* console output here */
                SET M_ERR = 0                            
             END IF;
                                 
