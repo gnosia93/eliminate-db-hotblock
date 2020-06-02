@@ -88,7 +88,7 @@ BEGIN
     DECLARE CONTINUE HANDLER for SQLEXCEPTION SET M_ERR = -1;
 
     loop_label:  LOOP
-        v_cnt := v_cnt + 1;
+        SET v_cnt = v_cnt + 1;
         
 
         BEGIN 
