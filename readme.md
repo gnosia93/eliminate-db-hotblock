@@ -57,7 +57,7 @@ https://aws.amazon.com/amazon-linux-2/
 $ 
 
 $ git clone https://github.com/gnosia93/demo-cache.git
-$ cd demo-cache
+$ cd ~/demo-cache
 $ cd src/main/resources
 $ vi application-prod.properties
 ```
