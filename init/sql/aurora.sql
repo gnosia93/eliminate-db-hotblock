@@ -33,8 +33,8 @@ insert into shop.product (name, price, delivery_type) values('청바지3', 300, 
 commit;
 */
 
-drop table if exists `shop.order`;
-create table `shop.order`
+drop table if exists shop.`order`;
+create table shop.`order`
 (
    order_id                int not null auto_increment,
    product_id              int not null,
@@ -49,7 +49,7 @@ create table `shop.order`
 );
 
 /*
-insert into `shop.order`(product_id, order_price, pay_status) values(1, 1000, 'Queued');
+insert into shop.`order`(product_id, order_price, pay_status) values(1, 1000, 'Queued');
 commit;
 */
 
