@@ -1,3 +1,4 @@
+
 Description:  This template deploys a VPC, with a pair of public and private subnets spread
   across two Availability Zones. It deploys an internet gateway, with a default
   route on the public subnets. 
@@ -445,11 +446,11 @@ Outputs:
 
   EC2Instnace1:
     Description: A reference to the created EC2Instance1
-    Value: !Ref WebInstance1
+    Value: !GetAtt WebInstance1.PublicDnsName
 
   EC2Instnace2:
     Description: A reference to the created EC2Instance2
-    Value: !Ref WebInstance2
+    Value: !GetAtt WebInstance2.PublicDnsName
     
   WebEndPoint:
     Description: A list of the private subnets
@@ -466,5 +467,4 @@ Outputs:
   Redis:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
-    
     
