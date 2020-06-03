@@ -472,9 +472,13 @@ Outputs:
     Description: A list of the private subnets
     Value: !Join [ ", ", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
     
-  ALB:
+  FrontEndPoint:
     Description: A list of the private subnets
-    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '-' ]]
+    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '80' ]]
+ 
+  ApiEndPoint:
+    Description: A list of the private subnets
+    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '8080' ]]
     
   AuroraCluster:
     Description: A reference to the created aurora
@@ -482,4 +486,6 @@ Outputs:
   
   Redis:
     Description: A reference to the created redis
-    Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ]]
+    Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
+    
+    
