@@ -43,7 +43,9 @@ login into ec2 instnaces, execute following command for application execution fr
 ```
 $ ssh -i your-ec2-key.pem ec2-user@your-ec2-instance-publicname
 
-$ git clone  
+$ git clone https://github.com/gnosia93/demo-cache.git
+$ cd democache
+
 ```
 
 
