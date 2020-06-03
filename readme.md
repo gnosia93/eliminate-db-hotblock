@@ -41,9 +41,20 @@ Addtionally you have to clone this repository from all your ec2 instances.
 Login into each ec2 instnaces and execute commands like followings.
 
 ```
-$ ssh -i your-ec2-key.pem ec2-user@your-ec2-instance-publicname
+$ ssh -i keypair-tokyo.pem ec2-user@ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com
+The authenticity of host 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com (13.114.101.172)' can't be established.
+ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com,13.114.101.172' (ECDSA) to the list of known hosts.
 
-$ git clone https://github.com/gnosia93/demo-cache.git
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-192-0-206 ~]$ 
+
+[ec2-user@ip-10-192-0-206 ~]$ git clone https://github.com/gnosia93/demo-cache.git
 $ cd democache
 
 ```
