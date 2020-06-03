@@ -80,26 +80,31 @@ spring.redis.port=6379
 spring.redis.host=<your-redis-cluster-endpoint>        
 ```
 At first execution of mvn package, it takes about 2 minitus for downing related java packages.
+Goto init/sql directory, and then change <your-aurora-address> into yours.(refer to cloudformation outputs)
 ```
 $ cd ~/demo-cache
 $ mvn package
 
 $ cd init/sql
 $ vi create-schema.sh 
-```
-
 
 [create-schema.sh]
-```
-#!/bin/sh
   
 AURORA=<your-aurora-address>
 mysql -u demo -pdemo12345 -h $AURORA < aurora.sql
 mysql -u demo -pdemo12345 -h $AURORA -e "select count(1) as 'gen_product_cnt' from shop.product"
+                                                 
+$ sh create-schema.sh 
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
++-----------------+
+| gen_product_cnt |
++-----------------+
+|           10000 |
++-----------------+                                                 
 ```
 
-When you execute run.sh, you can confirm start of spring java application.
-Finally, I recommend you to check whether there is certain problems with configuration or not.  
+Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
 ```
 $ sh scripts/run.sh
 $ tail -f tomcat.log
