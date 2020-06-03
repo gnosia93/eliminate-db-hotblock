@@ -25,20 +25,20 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 ### Infra Building ###
 
-Here, we are going to use AWS cloudformation to automate painfull and error-prone infrastucture building. 
-You can fild build configuration file which name is stack-build.yaml in subdirectory of this project.
+Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
+You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
 
-Go to AWS Cloudformation console, and with stack-build.yaml file you need to build infrasture of this project. 
-Normally it takes roughly 10 minitues for privision completion.
+Go to AWS Cloudformation console, and with stack-build.yaml you need to build infrasture of this project. 
+Normally it takes roughly 10 minitues for all infra provisioning.
 If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html)
 
-Below screen is the outputs example which can be founded in cloudformation's statck menu.
-You can check web, api endpoint url, and provisioned EC2 instances public address, etc.
+Below screen is the example outputs of cloudformation which can be founded at statck menu.
+You can identify web, api endpoint url, and provisioned EC2 instances public address, etc.
 
 ![cf-outputs](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
 
-Also you need to clone this repository from all your ec2 instances
-Login into ec2 instnaces and execute following like followings.
+Addtionally you have to clone this repository from all your ec2 instances.
+Login into each ec2 instnaces and execute commands like followings.
 
 ```
 $ ssh -i your-ec2-key.pem ec2-user@your-ec2-instance-publicname
