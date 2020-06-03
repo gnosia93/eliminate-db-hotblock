@@ -26,9 +26,9 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 ### Infra Provisioning ###
 
 Here, we are going to use AWS cloudformation to automate painfull and error-prone infrastucture setup. 
-All steps is composed of two phases.
-at phase I, we will upload stack-build.yaml which is located at .... file to your acccount s3 bucket.
-at phase II, we will build infrasture by using cloudformation. 
+All operations is composed of two phases.
+at phase I, you will upload stack-build.yaml file located in cloudformation directory of this demo into the your acccount s3 bucket.
+at phase II, you will build infrasture using cloudformation. 
 normally total required time is about above 10 minitues until all infra build is completed. 
 
 
