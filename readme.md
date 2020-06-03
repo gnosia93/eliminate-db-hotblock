@@ -62,6 +62,7 @@ $ vi application-prod.properties
 After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
+[application-prod.properties]
 ```
 spring.datasource.jdbc-url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
 spring.datasource.url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
@@ -84,6 +85,17 @@ $ cd ~/demo-cache
 $ mvn package
 
 $ cd init/sql
+$ vi create-schema.sh 
+```
+
+
+[create-schema.sh]
+```
+#!/bin/sh
+  
+AURORA=<your-aurora-address>
+mysql -u demo -pdemo12345 -h $AURORA < aurora.sql
+mysql -u demo -pdemo12345 -h $AURORA -e "select count(1) as 'gen_product_cnt' from shop.product"
 ```
 
 When you execute run.sh, you can confirm start of spring java application.
