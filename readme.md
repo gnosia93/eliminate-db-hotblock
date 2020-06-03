@@ -23,7 +23,7 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 
 
-### Infra Provisioning ###
+### Infra Building ###
 
 Here, we are going to use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can fild build configuration file which name is stack-build.yaml in subdirectory of this project.
@@ -32,8 +32,19 @@ Go to AWS Cloudformation console, and with stack-build.yaml file you need to bui
 Normally it takes roughly 10 minitues for privision completion.
 If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html)
 
-After login into your EC2 instances provisioned by cloudformation, you need to clone this repository at ec2-user home directory and do some configuration job before application running.
+Below screen is the outputs example which can be founded in cloudformation's statck menu.
+You can check web, api endpoint url, and provisioned EC2 instances public address, etc.
 
+<< picture >>
+
+Also you need to clone this repository from the provisioned ec2 instances, 
+login into ec2 instnaces, execute following command for application execution from your PC.
+
+```
+$ ssh -i your-ec2-key.pem ec2-user@your-ec2-instance-publicname
+
+$ git clone  
+```
 
 
 
