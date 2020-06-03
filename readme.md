@@ -23,7 +23,7 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 
 
-### Infra Building ###
+### Prepailing Infra ###
 
 Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
@@ -36,6 +36,8 @@ Below screen is the example outputs of cloudformation which can be founded at st
 You can identify web, api endpoint url, and provisioned EC2 instances public address, etc.
 
 ![cf-outputs](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
+
+### Configure Appication ###
 
 Addtionally you have to clone this repository from all your ec2 instances.
 Login into each ec2 instnaces and execute commands like followings.
