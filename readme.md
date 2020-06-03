@@ -127,6 +127,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
 
 ```
+$ cd ~/demo-cache
 $ sh scripts/run.sh
 $ tail -f tomcat.log
 ```
