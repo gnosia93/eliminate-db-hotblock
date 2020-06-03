@@ -79,14 +79,17 @@ spring.redis.port=6379
 spring.redis.host=<your-redis-cluster-endpoint>        
 ```
 At first execution of mvn package, it takes about 2 minitus for downing related java packages.
-When you execute run.sh, you can confirm start of spring java application.
 ```
 $ cd ~/demo-cache
 $ mvn package
-$ sh scripts/run.sh
+
+$ cd init/sql
 ```
+
+When you execute run.sh, you can confirm start of spring java application.
 Finally, I recommend you to check whether there is certain problems with configuration or not.  
 ```
+$ sh scripts/run.sh
 $ tail -f tomcat.log
 ```
 
