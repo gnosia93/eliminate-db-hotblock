@@ -25,9 +25,12 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 ### Infra Provisioning ###
 
-1. cache.yml 파일을 S3 로 업로드 한다.
+infra provisioning step is composed of two steps
 
-2. cloudformation 콘솔에서 스택을 생성한다. 10분 정도 기다라야 한다. 
+first one is that upload stack-build.yaml file to your acccount s3 bucket.
+
+second one is to build stack using cloudformation. normally it takes about 10 minitues until construction complete. 
+
 
 
 
