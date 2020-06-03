@@ -84,27 +84,9 @@ Goto init/sql directory, and then change <your-aurora-address> into yours.(refer
 ```
 $ cd ~/demo-cache
 $ mvn package
-
-$ cd init/sql
-$ vi create-schema.sh 
-
-[create-schema.sh]
-  
-AURORA=<your-aurora-address>
-mysql -u demo -pdemo12345 -h $AURORA < aurora.sql
-mysql -u demo -pdemo12345 -h $AURORA -e "select count(1) as 'gen_product_cnt' from shop.product"
-                                                 
-$ sh create-schema.sh 
-mysql: [Warning] Using a password on the command line interface can be insecure.
-mysql: [Warning] Using a password on the command line interface can be insecure.
-+-----------------+
-| gen_product_cnt |
-+-----------------+
-|           10000 |
-+-----------------+                                                 
 ```
-
 Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
+
 ```
 $ sh scripts/run.sh
 $ tail -f tomcat.log
