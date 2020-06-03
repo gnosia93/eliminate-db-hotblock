@@ -38,6 +38,7 @@ create table `shop.order`
 (
    order_id                int not null auto_increment,
    product_id              int not null,
+   thumb_image_url         varchar(1000),
    order_price             int not null,
    pay_status              enum('Queued', 'Processing', 'error', 'Completed') not null,
    order_ymdt              datetime default CURRENT_TIMESTAMP,
