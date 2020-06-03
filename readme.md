@@ -32,8 +32,7 @@ Go to AWS Cloudformation console, and with stack-build.yaml file you need to bui
 Normally it takes roughly 10 minitues for privision completion.
 If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html)
 
-After login into your EC2 instances provisioned by cloudformation, you need to clone this repository and
-some configuration for application running.
+After login into your EC2 instances provisioned by cloudformation, you need to clone this repository at ec2-user home directory and do some configuration job before application running.
 
 
 
