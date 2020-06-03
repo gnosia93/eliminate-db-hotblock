@@ -122,8 +122,20 @@ auto generated datas.
 
 (optional) check and refer information in create-schame.sql file for login. 
 
+
+Goto init/sql directory, and then change <your-aurora-address> into yours.(refer to cloudformation outputs)
 ```
-$ cd /home/ec2-user/demo-cache/init/sql
+$ cd ~/demo-cache
+$ cd init/sql
+$ vi create-schema.sh 
+
+[create-schema.sh]
+
+AURORA=<your-aurora-address>
+mysql -u demo -pdemo12345 -h $AURORA < aurora.sql
+mysql -u demo -pdemo12345 -h $AURORA -e "select count(1) as 'gen_product_cnt' from shop.product"
+    
+    
 $ sh create-schema.sh 
 mysql: [Warning] Using a password on the command line interface can be insecure.
 mysql: [Warning] Using a password on the command line interface can be insecure.
@@ -131,11 +143,8 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 | gen_product_cnt |
 +-----------------+
 |           10000 |
-+-----------------+
++-----------------+                                                 
 ```
-
-
-
 
 ### Application Setup ###
 
