@@ -23,7 +23,7 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 
 
-### Prepailing Infra ###
+### Infra Provisioning ###
 
 Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
