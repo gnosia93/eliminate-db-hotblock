@@ -60,6 +60,8 @@ $ cd demo-cache
 $ mvn package
 $ cd src/main/resources
 $ vi application-prod.properties
+$ mvn clean
+# mvn package
 
 ```
 After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
