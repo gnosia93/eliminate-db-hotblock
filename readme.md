@@ -39,7 +39,6 @@ You can identify web, api endpoint url, and provisioned EC2 instances public add
 
 Addtionally you have to clone this repository from all your ec2 instances.
 Login into each ec2 instnaces and execute commands like followings.
-At first maven execution(eg. mvn package), it takes about 2 minitus for downing related java packages.
 
 ```
 $ ssh -i keypair-tokyo.pem ec2-user@ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com
@@ -57,12 +56,8 @@ $
 
 $ git clone https://github.com/gnosia93/demo-cache.git
 $ cd demo-cache
-$ mvn package
 $ cd src/main/resources
 $ vi application-prod.properties
-$ mvn clean
-# mvn package
-
 ```
 After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
 You can find all required connection address from cloudformation stack outputs tab like above. 
@@ -83,8 +78,13 @@ spring.redis.lettuce.pool.min-idle=2
 spring.redis.port=6379
 spring.redis.host=<your-redis-cluster-endpoint>        
 ```
-
-
+At first execution of mvn package, it takes about 2 minitus for downing related java packages.
+When you execute run.sh, you can confirm start of spring java application.
+```
+$ cd ~/demo-cache
+$ mvn package
+$ sh scripts/run.sh
+```
 
 
 
