@@ -97,9 +97,7 @@ If you are good at MySQL database and compatibles, you can login auroa RDS using
 auto generated datas.
 
 (optional) check and refer information in create-schame.sql file for login. 
-
-
-Goto init/sql directory, and then change <your-aurora-address> into yours.(refer to cloudformation outputs)
+Goto init/sql directory, and then change `<your-aurora-address>` into yours.(refer to cloudformation outputs)
 ```
 $ cd ~/demo-cache
 $ cd init/sql
