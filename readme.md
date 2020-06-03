@@ -39,6 +39,7 @@ You can identify web, api endpoint url, and provisioned EC2 instances public add
 
 Addtionally you have to clone this repository from all your ec2 instances.
 Login into each ec2 instnaces and execute commands like followings.
+At first maven execution(eg. mvn package), it takes about 2 minitus for downing related java packages.
 
 ```
 $ ssh -i keypair-tokyo.pem ec2-user@ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com
@@ -52,13 +53,34 @@ Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.
       ___|\___|___|
 
 https://aws.amazon.com/amazon-linux-2/
-[ec2-user@ip-10-192-0-206 ~]$ 
+$ 
 
-[ec2-user@ip-10-192-0-206 ~]$ git clone https://github.com/gnosia93/demo-cache.git
-$ cd democache
+$ git clone https://github.com/gnosia93/demo-cache.git
+$ cd demo-cache
+$ mvn package
+$ cd src/main/resources
+$ vi application-prod.properties
 
 ```
+After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
+You can find all required connection address from cloudformation stack outputs tab like above. 
 
+```
+spring.datasource.jdbc-url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
+spring.datasource.username=demo
+spring.datasource.password=demo12345
+spring.datasource.maximum-pool-size=100
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+spring.redis.lettuce.pool.max-active=10
+spring.redis.lettuce.pool.max-idle=10
+spring.redis.lettuce.pool.min-idle=2
+spring.redis.port=6379
+spring.redis.host=<your-redis-cluster-endpoint>        
+```
 
 
 
