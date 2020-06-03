@@ -37,8 +37,8 @@ You can check web, api endpoint url, and provisioned EC2 instances public addres
 
 << picture >>
 
-Also you need to clone this repository from the provisioned ec2 instances, 
-login into ec2 instnaces, execute following command for application execution from your PC.
+Also you need to clone this repository from all your ec2 instances
+Login into ec2 instnaces and execute following like followings.
 
 ```
 $ ssh -i your-ec2-key.pem ec2-user@your-ec2-instance-publicname
