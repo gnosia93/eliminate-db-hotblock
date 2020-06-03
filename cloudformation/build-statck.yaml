@@ -347,12 +347,6 @@ Resources:
         - Key: Name
           Value: ApiAppTargetGroup
   
-  
-  
-  
-  
-  
-          
 
 ## create database
 
@@ -443,36 +437,21 @@ Resources:
 #      SnapshotRetentionLimit: !Ref SnapshotRetentionLimit
 #      SnapshotWindow: !Ref SnapshotWindow
     
-    
-              
-     
-##      AWSTemplateFormatVersion: "2010-09-09"  
-##Resources:  
-#  WebInstance:
-#    Type: AWS::EC2::Instance
-#    Properties:
-#      InstanceType: t2.nano
-#      ImageId: ami-80861296
-#      KeyName: keypair-tokyo
-#      SecurityGroupIds:
-#        - !Ref WebSecurityGroup
-#      SubnetId: !Ref PublicSubnet1
-      
 
 Outputs:
   VPC:
     Description: A reference to the created VPC
     Value: !Ref VPC
 
-  PublicSubnets:
-    Description: A list of the public subnets
-    Value: !Join [ ", ", [ !Ref PublicSubnet1, !Ref PublicSubnet2 ]]
+  EC2Instnace1:
+    Description: A reference to the created EC2Instance1
+    Value: !Ref WebInstance1
 
-  PrivateSubnets:
-    Description: A list of the private subnets
-    Value: !Join [ ", ", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
+  EC2Instnace2:
+    Description: A reference to the created EC2Instance2
+    Value: !Ref WebInstance2
     
-  FrontEndPoint:
+  WebEndPoint:
     Description: A list of the private subnets
     Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '80' ]]
  
@@ -487,5 +466,4 @@ Outputs:
   Redis:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
-    
     
