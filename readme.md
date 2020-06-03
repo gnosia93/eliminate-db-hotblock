@@ -25,6 +25,13 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 ### Infra Provisioning ###
 
+1. cache.yml 파일을 S3 로 업로드 한다.
+
+2. cloudformation 콘솔에서 스택을 생성한다. 10분 정도 기다라야 한다. 
+
+
+
+
 - cloudformation 
 
 
