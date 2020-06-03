@@ -235,9 +235,12 @@ Resources:
             sudo yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
             sudo yum install -y mysql-community-client
             cd /home/ec2-user
-            sudo -u ec2-user -c "git clone https://github.com/gnosia93/demo-cache.git"
-            
-    
+            sudo -u ec2-user -c "/usr/bin/git clone https://github.com/gnosia93/demo-cache.git"
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ]
+          
+
   WebInstance2:
     Type: AWS::EC2::Instance
     Properties:
@@ -260,8 +263,11 @@ Resources:
             sudo yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
             sudo yum install -y mysql-community-client
             cd /home/ec2-user
-            sudo -u ec2-user -c "git clone https://github.com/gnosia93/demo-cache.git"
-            
+            sudo -u ec2-user -c "/usr/bin/git clone https://github.com/gnosia93/demo-cache.git"
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ] 
+          
   
   WebAppALB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -277,7 +283,7 @@ Resources:
         - Key: Name
           Value: WebAppALB
           
-  Listener:
+  WebListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
       DefaultActions:
@@ -286,13 +292,45 @@ Resources:
             Ref: WebAppTargetGroup
       LoadBalancerArn:
         Ref: WebAppALB
-      Port: 8080
+      Port: 80
       Protocol: HTTP      
 
   WebAppTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      Name: !Join [ '-', [ !Ref EnvironmentName, 'tg' ] ]
+      Name: !Join [ '-', [ !Ref EnvironmentName, 'tg-web' ] ]
+      Port: 80
+      Protocol: 'HTTP'
+      VpcId: !Ref VPC
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: 80
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Targets:
+        - Id: !Ref WebInstance1
+        - Id: !Ref WebInstance2
+      Tags:
+        - Key: Name
+          Value: WebAppTargetGroup
+  
+  ApiListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn:
+            Ref: ApiAppTargetGroup
+      LoadBalancerArn:
+        Ref: WebAppALB
+      Port: 8080
+      Protocol: HTTP      
+
+  ApiAppTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: !Join [ '-', [ !Ref EnvironmentName, 'tg-api' ] ]
       Port: 8080
       Protocol: 'HTTP'
       VpcId: !Ref VPC
@@ -307,7 +345,13 @@ Resources:
         - Id: !Ref WebInstance2
       Tags:
         - Key: Name
-          Value: WebAppTargetGroup
+          Value: ApiAppTargetGroup
+  
+  
+  
+  
+  
+  
           
 
 ## create database
