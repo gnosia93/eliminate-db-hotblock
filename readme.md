@@ -35,7 +35,7 @@ If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.a
 Below screen is the outputs example which can be founded in cloudformation's statck menu.
 You can check web, api endpoint url, and provisioned EC2 instances public address, etc.
 
-<< picture >>
+![cf-outputs.png](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
 
 Also you need to clone this repository from all your ec2 instances
 Login into ec2 instnaces and execute following like followings.
