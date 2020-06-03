@@ -85,7 +85,10 @@ $ cd ~/demo-cache
 $ mvn package
 $ sh scripts/run.sh
 ```
-
+Finally, I recommend you to check where there is certain problems with configuration like below. 
+```
+$ tail -f tomcat.log
+```
 
 
 
