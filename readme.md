@@ -87,14 +87,6 @@ Goto init/sql directory, and then change <your-aurora-address> into yours.(refer
 $ cd ~/demo-cache
 $ mvn package
 ```
-Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
-
-```
-$ sh scripts/run.sh
-$ tail -f tomcat.log
-```
-
-
 
 ### Preparing Sample DB ###
 
@@ -130,16 +122,15 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 +-----------------+                                                 
 ```
 
-### Application Setup ###
+### Execute Application ###
 
-
-
-### App Execution ###
+Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
 
 ```
-$ java -Dspring.profiles.active=prod -Dserver.port=8080 -jar democache-0.0.1-SNAPSHOT.jar
-
+$ sh scripts/run.sh
+$ tail -f tomcat.log
 ```
+// check if appliction is working correctly.
 
 
 ### BenchMark ###
