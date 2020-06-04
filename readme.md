@@ -15,13 +15,29 @@ java language, you can easily catch up with details.
 ### Business Problems ###
 
 
-### ElastiCache Briefs ###
+## ElastiCache Briefs ##
 
 Before diving deeply, I want to just introduce about AWS elastiCache for your understanding about this article.
 
-### Architecture ###
+## Architecture ##
+
+ALB has two endpoint which port number is 80, 8080. 
+Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
+On the other hand, port 8080 is rest api endpoint to perform stress test with apache bench(AB).
+
+Under the ALB, there are two EC2 instnaces which contain react for ui and springboot for api.
+At the data layer, we have Amazon Elasticache for redis which have cache objects counting product selling
+and auroa database cluster which is composed of one master node, no replica.
+and then Aurora database have two DB tables which name is product and order.
+
+* /site-address/order/add
+* /site-address/order/event-add
+
+<< architecture >>
 
 
+
+## Infrastructure Building ##
 
 ### Infra Provisioning ###
 
@@ -132,7 +148,13 @@ $ tail -f tomcat.log
 // check if appliction is working correctly.
 
 
-### BenchMark ###
+## BenchMark ##
+
+* AB 에 대한 간략한 설명 및 노트북 인스톨
+
+* json 데이터 설명, .sh 설명
+
+* 테스트 실행.
 
 - AB
 
@@ -141,7 +163,7 @@ $ yum install -y httpd-tools
 
 ```
 
-- Performance Graph
+<< Performance Graph >>
 
 
 ### Pricing ###
