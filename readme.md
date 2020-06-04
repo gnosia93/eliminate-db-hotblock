@@ -30,6 +30,9 @@ At the data layer, we have Amazon Elasticache for redis which have product selli
 and auroa database cluster which is composed of one master node, no replica.
 and then Aurora database have two DB tables which name is product and order.
 
+* /site-address/order/add
+* /site-address/order/event-add
+
 << architecture >>
 
 
