@@ -148,7 +148,13 @@ $ tail -f tomcat.log
 // check if appliction is working correctly.
 
 
-### BenchMark ###
+## BenchMark ##
+
+* AB 에 대한 간략한 설명 및 노트북 인스톨
+
+* json 데이터 설명, .sh 설명
+
+* 테스트 실행.
 
 - AB
 
@@ -157,7 +163,7 @@ $ yum install -y httpd-tools
 
 ```
 
-- Performance Graph
+<< Performance Graph >>
 
 
 ### Pricing ###
