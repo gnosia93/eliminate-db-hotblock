@@ -25,6 +25,11 @@ ALB has two endpoint which port number is 80, 8080.
 Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
 On the other hand, port 8080 is rest api endpoint to perform stress test with apache bench(AB).
 
+Under the ALB, there are two EC2 instnaces which contain react for ui and springboot for api.
+At the data layer, we have Amazon Elasticache for redis which have product selling count cache objects
+and auroa database cluster which is composed of one master node, no replica.
+and then Aurora database have two DB tables which name is product and order.
+
 << architecture >>
 
 
