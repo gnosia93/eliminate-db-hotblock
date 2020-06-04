@@ -22,6 +22,7 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 ## Architecture ##
 
 ALB has two endpoint which port number is 80, 8080.
+
 Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
 On the other hand, port 8080 is rest api endpoint to perform stress test with apache bench(AB).
 
