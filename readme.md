@@ -252,6 +252,12 @@ Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hype
 If you want to find more detailed information about Apache Brench, please goto 
 https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm
 
+and you need to install ab to your computer.
+execute following command if operation system is Mac OS and have homebrew package manager.
+otherwise, refer Apache Bench site for installation. 
+```
+$ brew install httpd-tools
+```
 
 ![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png)
 
@@ -294,10 +300,6 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-http-tools package is containing Apache Bench tool, If you are using Mac OS, install Apache Bench with homebrew like below.
-```
-$ brew install httpd-tools
-```
 
 
 
