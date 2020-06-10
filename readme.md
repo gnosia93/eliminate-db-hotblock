@@ -251,7 +251,8 @@ Now, our web page is working..
 
 Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hypertext Transfer Protocol (HTTP) web server. Although it is designed to measure the performance of Apache web server, yet it can also be used to test any other web server that is equally good. With this tool, you can quickly know how many requests per second your web server is capable of serving.
 
-If you want a detail information about Apache Bench, go to this site(https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm)
+You can find more detailed information on the site below.
+(https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm)
 
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
