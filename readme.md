@@ -45,7 +45,7 @@ So this use case is not suitable for your application workload. But by walking t
 
 ## Architecture ##
 
-This is simple architecture of 3 tier web application. But at the backend database tier, Amazon Elasticache for redis is occupied to eliminate database hot block which reduce web application performance severely.
+This is simple architecture of 3 tier web application. But at the backend database tier, Amazon Elasticache for redis is occupied to eliminate database hot block which degrade web application performance severely.
 
 Both Web and API service have a public end point(public dns name) respectively.
 and sharing same public subnet of VPC for supporting simple performance test from outside of Amazon VPC. 
