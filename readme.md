@@ -13,13 +13,13 @@ Usually the common use case of cache system is divided into three category blows
 In this demo, I want to share with you another use case of cache system for large scale web application
 having frequent update about specific data items, which is saved in rdbms. 
 
-- how to eliminating DB Hot Blocks with heavy transcation of in small range of data. 
+~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
+~~ 게시판 글수 카운트.
+~~ 특정 상품에 대한 실시간 판매 건수 계산.
+~~ wo
 
-
-
-In this blog, We are going to go through how to eliminate database hotblock with amazon elasticache redis and
-java springboot web application.
-
+We are going to go through how to eliminate database hotblock with amazon elasticache redis and
+java spring boot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
 java language, you can easily catch up with details.
 
