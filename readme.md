@@ -20,9 +20,6 @@ For reducing database burden under a heavy transation environment, we just lever
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod time(failover time).
 So this use case is not suitable for your application workload. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web scale services.* 
 
-## ElastiCache Briefs ##
-
-Before diving deeply, I want to just introduce about AWS elastiCache for your understanding about this article.
 
 ## Architecture ##
 
