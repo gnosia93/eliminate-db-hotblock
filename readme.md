@@ -363,9 +363,11 @@ Transfer rate:          60.43 [Kbytes/sec] received
 ```
 
 
+## BenchMarking Result ##
 
+* Time taken for tests:   25.471 seconds  (left side senario, only use aurora rds)
+* Time taken for tests:   5.861 seconds  (right side senario, use both elasticache and aurora rds)
 
-<< Performance Graph >>
 
 
 ### Addtional Contents (Planned) ##
