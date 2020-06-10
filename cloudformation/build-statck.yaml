@@ -235,16 +235,76 @@ Resources:
             yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
             yum install -y mysql-community-client
             cd /home/ec2-user
+            git clone https://github.com/gnosia93/demo-cache-front.git
+            chown -R ec2-user:ec2-user demo-cache-front/
+            cd demo-cache-front
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref EnvironmentName, 'web1' ] ]
+          
+  WebInstance2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref WebNodeType
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
+      KeyName: !Ref KeyPair
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+        - !Ref ALBSecurityGroup
+      SubnetId: !Ref PublicSubnet2
+      UserData:
+        Fn::Base64:
+          Fn::Sub: |
+            #!/bin/bash 
+            yum install -y java-1.8.0-openjdk
+            yum install -y java-1.8.0-openjdk-devel
+            yum install -y git
+            yum install -y maven
+            yum install -y telnet
+            yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+            yum install -y mysql-community-client
+            cd /home/ec2-user
+            git clone https://github.com/gnosia93/demo-cache-front.git
+            chown -R ec2-user:ec2-user demo-cache-front/
+            cd demo-cache-front
+            
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref EnvironmentName, 'web2' ] ] 
+          
+          
+  ApiInstance1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref WebNodeType
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
+      KeyName: !Ref KeyPair
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+        - !Ref ALBSecurityGroup
+      SubnetId: !Ref PublicSubnet1
+      UserData:
+        Fn::Base64:
+          Fn::Sub: |
+            #!/bin/bash 
+            yum install -y java-1.8.0-openjdk
+            yum install -y java-1.8.0-openjdk-devel
+            yum install -y git
+            yum install -y maven
+            yum install -y telnet
+            yum install -y https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+            yum install -y mysql-community-client
+            cd /home/ec2-user
             git clone https://github.com/gnosia93/demo-cache.git
             chown -R ec2-user:ec2-user demo-cache/
             cd demo-cache
             sudo -u ec2-user mvn package
       Tags:
         - Key: Name
-          Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ]
+          Value: !Join ['-', [ !Ref EnvironmentName, 'api1' ] ]          
           
-
-  WebInstance2:
+  
+  ApiInstance2:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: !Ref WebNodeType
@@ -272,12 +332,16 @@ Resources:
             sudo -u ec2-user mvn package
       Tags:
         - Key: Name
-          Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ] 
-          
+          Value: !Join ['-', [ !Ref EnvironmentName, 'api2' ] ]          
+  
+  
+  
+  
   
   WebAppALB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
+      Name: !Join [ '-', [ !Ref EnvironmentName, 'web-alb' ] ]
       IpAddressType: ipv4
       Scheme: internet-facing
       SecurityGroups:
@@ -321,6 +385,23 @@ Resources:
         - Key: Name
           Value: WebAppTargetGroup
   
+  
+  
+  ApiALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Join [ '-', [ !Ref EnvironmentName, 'api-alb' ] ]
+      IpAddressType: ipv4
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref ALBSecurityGroup
+      Subnets:
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+      Tags:
+        - Key: Name
+          Value: ApiALB
+  
   ApiListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
@@ -329,15 +410,15 @@ Resources:
           TargetGroupArn:
             Ref: ApiAppTargetGroup
       LoadBalancerArn:
-        Ref: WebAppALB
-      Port: 8080
+        Ref: ApiALB
+      Port: 80
       Protocol: HTTP      
 
   ApiAppTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
       Name: !Join [ '-', [ !Ref EnvironmentName, 'tg-api' ] ]
-      Port: 8080
+      Port: 80
       Protocol: 'HTTP'
       VpcId: !Ref VPC
       HealthCheckIntervalSeconds: 30
@@ -347,8 +428,8 @@ Resources:
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
       Targets:
-        - Id: !Ref WebInstance1
-        - Id: !Ref WebInstance2
+        - Id: !Ref ApiInstance1
+        - Id: !Ref ApiInstance2
       Tags:
         - Key: Name
           Value: ApiAppTargetGroup
@@ -449,21 +530,29 @@ Outputs:
     Description: A reference to the created VPC
     Value: !Ref VPC
 
-  EC2Instnace1:
-    Description: A reference to the created EC2Instance1
+  WebInstance1:
+    Description: A reference to the created web-1
     Value: !GetAtt WebInstance1.PublicDnsName
 
-  EC2Instnace2:
-    Description: A reference to the created EC2Instance2
+  WebInstance2:
+    Description: A reference to the created web-2
     Value: !GetAtt WebInstance2.PublicDnsName
+
+  ApiInstnace1:
+    Description: A reference to the created api-1
+    Value: !GetAtt ApiInstance1.PublicDnsName
+
+  ApiInstnace2:
+    Description: A reference to the created api-2
+    Value: !GetAtt ApiInstance2.PublicDnsName
     
   WebEndPoint:
-    Description: A list of the private subnets
-    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '80' ]]
+    Description: A reference to web 
+    Value: !GetAtt WebAppALB.DNSName
  
   ApiEndPoint:
-    Description: A list of the private subnets
-    Value: !Join [ ":", [ !GetAtt WebAppALB.DNSName, '8080' ]]
+    Description: A reference to api
+    Value: !GetAtt ApiALB.DNSName
     
   AuroraCluster:
     Description: A reference to the created aurora
@@ -472,3 +561,4 @@ Outputs:
   Redis:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
+    
