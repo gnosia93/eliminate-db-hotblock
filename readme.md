@@ -1,11 +1,19 @@
 
 # Improving Appication Performance with AWS ElastiCache #
 
-Cache System is usually used for the purpose of 
+Today's application is ... 
+cache system have some portion of large scale web application.
+Cache System is usually used for the purpose  
 
-- DB Result Caching
-- Session Store
-- Eliminating DB Hot Blocks when heavy transcation occurs in small range of data. 
+* DB Result Caching
+* Session Store or temporary store for product recommendation 
+* Hot read data with stale ..
+ 
+In this project, I want to share with you how to 
+
+- Eliminating DB Hot Blocks with heavy transcation of in small range of data. 
+
+
 
 In this blog, We are going to go through how to eliminate database hotblock with amazon elasticache redis and
 java springboot web application.
