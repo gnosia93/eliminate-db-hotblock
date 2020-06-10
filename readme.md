@@ -124,6 +124,7 @@ $
 * curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
 * sudo yum install -y nodejs
 * sudo npm install cross-env -g
+* npm audit fix
 * sh run.sh
 
 ### Configure API Server ###
