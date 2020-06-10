@@ -143,8 +143,9 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 ### Execute Application ###
 
 Now, We have done all the configuration and sample database building.
-Finally, exeucte run.sh to start spring boot java application and check if java web application is working properly.
-If you have any exception, please check [application-prod.properties] configuration file and if it have valid information.
+Finally, execute run.sh to start spring boot java application and check if java web application is working properly.
+The result of wget must be like belows.
+If you have any problem, please check [application-prod.properties] configuration file and tomcat.log in project root.
 
 ```
 $ cd ~/demo-cache
