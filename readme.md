@@ -41,12 +41,12 @@ and then Aurora database have two DB tables which name is product and order.
 
 ## Infrastructure Building ##
 
-### Infra Provisioning /w CloudFormation ###
+### Infra Provisioning with CloudFormation ###
 
 Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
 
-Go to AWS Cloudformation console, and build build infrasture of this project with stack-build.yaml.
+Go to AWS Cloudformation console, and build infrasture of this project with stack-build.yaml.
 Normally it takes about 10 minitues for all infra provisioning.
 If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html)
 
@@ -56,20 +56,12 @@ You can easily identify web, api endpoint, and provisioned EC2 instances public 
 ![cf-outputs](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
 
 AuroraCluster and Redis URL is used at JAVA springboot application configuration.
-Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, which service port 80.
+Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
 ### Configure API Server ###
 
-Addtionally you have to clone this repository from all your ec2 instances.
-Login into each ec2 instnaces and execute commands like followings.
-
-API 서버가 두대이므로, 동일한 작업을 한번 더 한다.
-
-----
-
-
-First, log into your api-server and then set your backend information like redis and aurora database connection.
-please refer following instruction to change your settings.
+In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database.
+Please refer following instruction to do your settings.
 
 ```
 $ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
@@ -108,35 +100,36 @@ spring.redis.lettuce.pool.min-idle=2
 spring.redis.port=6379
 spring.redis.host=<your-redis-cluster-endpoint>        
 ```
-At first execution of mvn package, it takes about 2 minitus for downing related java packages.
-Goto init/sql directory, and then change <your-aurora-address> into yours.(refer to cloudformation outputs)
-```
-$ cd ~/demo-cache
-$ mvn clean; mvn package       
-```
 
-### Preparing Sample DB ###
+### Initialize Database ###
 
-Next step is to create schema objects and initialize tables. please execute command like below at ec2 instance console,
-and you need to confirm product table's row count is 10000. 
+In this project, we are using Aurora MySQL datbase which has only primary node,
+and making database tables, procedure and buidling sample data of product table.
+Please execute a command like below at ec2 instance console at either api server instances and
+you need to confirm product table's row count is 10000. 
 
-If you are good at MySQL database and compatibles, you can login auroa RDS using mysql client and check sample schema,
+If you are good at MySQL database and compatibles, you can login Auroa RDS using mysql client and check sample schema,
 auto generated datas.
 
-(optional) check and refer information in create-schame.sql file for login. 
-Goto init/sql directory, and then change `<your-aurora-address>` into yours.(refer to cloudformation outputs)
+Goto init/sql sub directory under the demo-cache project root,  
 ```
-$ cd ~/demo-cache
-$ cd init/sql
+$ cd ~/demo-cache/init/sql
 $ vi create-schema.sh 
+````
+
+and change `<your-aurora-address>` into yours.(refer to cloudformation outputs)
+As you see, We will database user which name is demo and password demo12345
+Don't modify this database user login information. 
 
 [create-schema.sh]
-
+```
 AURORA=<your-aurora-address>
 mysql -u demo -pdemo12345 -h $AURORA < aurora.sql
 mysql -u demo -pdemo12345 -h $AURORA -e "select count(1) as 'gen_product_cnt' from shop.product"
-    
-    
+```    
+
+You can check schema build result from execution create-schema.sh like below.
+```
 $ sh create-schema.sh 
 mysql: [Warning] Using a password on the command line interface can be insecure.
 mysql: [Warning] Using a password on the command line interface can be insecure.
@@ -149,14 +142,17 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 ### Execute Application ###
 
-Finally, exeucte run.sh to start spring boot java application and you can check logs using tail like below.
+Now, We have done all the configuration and sample database building.
+Finally, exeucte run.sh to start spring boot java application and check if java web application is working properly.
+If you have any exception, please check [application-prod.properties] configuration file and if it have valid information.
 
 ```
 $ cd ~/demo-cache
+$ mvn clean; mvn package
 $ sh scripts/run.sh
-$ tail -f tomcat.log
+$ wget localhost
 ```
-// check if appliction is working correctly.
+run.sh shell command have a java application information, and if you 
 
 
 ## BenchMark Test ##
