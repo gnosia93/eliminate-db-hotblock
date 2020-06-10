@@ -11,9 +11,9 @@ java springboot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
 java language, you can easily catch up with details.
 
-*Disclaimer 
+*Disclaimer* 
 
-This is just another applicable use case with Amazon Elasticache for redis.
+*This is just another applicable use case with Amazon Elasticache for redis.
 For reducing database burden under a heavy transation environment, you can use java spring boot transaction management mechanism which support global transcations among different storage backend system.
 Altough Amazon elasticache for redis support HA configuration, it is just working as DNS failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for failover time.
