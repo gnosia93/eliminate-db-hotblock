@@ -270,7 +270,7 @@ and update cache object value coresponding key (here, key is composed with new o
 With ab, we will make order request from the our laptop. 
 Incurred workload's concurrency is 150 and total volume of request is 3000 per one trial.
 
-Go to benchmark sub directory under this project, check following information and replace <your-api-endpoint> to yours.
+Go to benchmark sub directory under this project, check following information and replace `<your-api-endpoint>` to yours.
 
 ```
 $ cd benchmark
@@ -300,16 +300,7 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-
-
-
-* AB 에 대한 간략한 설명 및 노트북 인스톨
-
-* json 데이터 설명, .sh 설명
-
-* 테스트 실행.
-
-- AB
+#### Executing ab ####
 
 
 * /site-address/order/add
