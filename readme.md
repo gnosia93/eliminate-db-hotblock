@@ -2,15 +2,16 @@
 # Improving Appication Performance with AWS ElastiCache #
 
 Today's application is ... 
-cache system have some portion of large scale web application.
-Cache System is usually used for the purpose  
+
+Cache system have some portion of large scale web application.
+Usually the common use case of cache system is divided into three category blows.  
 
 * DB Result Caching
 * Session Store 
-* Hot read data with stale ..
+* Hot read with stale data
  
-In this project, I want to share with you another use case of cache system for large scale web application
-and 
+In this demo, I want to share with you another use case of cache system for large scale web application
+having frequent update about specific data items, which is saved in rdbms. 
 
 - how to eliminating DB Hot Blocks with heavy transcation of in small range of data. 
 
