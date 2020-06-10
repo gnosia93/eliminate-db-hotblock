@@ -148,7 +148,7 @@ $ tail -f tomcat.log
 
 ## BenchMark Test ##
 
-<< 테스트 아키텍처 >>
+![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png)
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
 
