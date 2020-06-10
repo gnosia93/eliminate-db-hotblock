@@ -393,7 +393,7 @@ we used following spec.. << spec >>
 
 
 
-As you can see from the test results, With Redis Benchmark result is about 5 times faster than DB only.
+As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only.
 
 This test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
