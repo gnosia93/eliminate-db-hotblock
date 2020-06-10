@@ -197,9 +197,9 @@ like wise, if you don't watch output like above please check your configuration.
 
 ### Configure Web Server ###
 
-As you see our architecture diagram, web server need to comunicate with api load balancer, so you have to set up api endpoint of node.js application.
+As you can see our architecture diagram, web server need to comunicate with api load balancer, so you have to set up api endpoint of node.js application.
 Log into your web-server with ssh or compatible ssh client and then set up your api endpoint for node.js appliation
-You have to bear in mind that we have two web server.
+You have to bear in mind that we have two web server. so you have to do this configuration for each server.
 Please refer following instruction to do your settings.
 
 ```
