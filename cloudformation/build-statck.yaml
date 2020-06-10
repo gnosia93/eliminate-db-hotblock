@@ -237,6 +237,8 @@ Resources:
             cd /home/ec2-user
             git clone https://github.com/gnosia93/demo-cache.git
             chown -R ec2-user:ec2-user demo-cache/
+            cd demo-cache
+            sudo -u ec2-user mvn package
       Tags:
         - Key: Name
           Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ]
@@ -266,6 +268,8 @@ Resources:
             cd /home/ec2-user
             git clone https://github.com/gnosia93/demo-cache.git
             chown -R ec2-user:ec2-user demo-cache/
+            cd demo-cache
+            sudo -u ec2-user mvn package
       Tags:
         - Key: Name
           Value: !Join ['-', [ !Ref EnvironmentName, 'vm2' ] ] 
@@ -468,7 +472,3 @@ Outputs:
   Redis:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
-    
-    
-    
-    
