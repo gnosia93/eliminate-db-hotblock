@@ -47,7 +47,8 @@ So this use case is not suitable for your application workload. But by walking t
 
 This is simple architecture of 3 tier web application. but in the backend storage, Amazon Elasticache  for redis is occupied to eliminate database hot block which reduce web application performance severly.
 
-Both Web and Api System have a public end point(public dnsname) respectively for supporting simple test from outside of Amazon VPC. 
+Both Web and Api System have a public end point(public dnsname) respectively.
+and sharing same public subnet of VPC for supporting simple performance test from outside of Amazon VPC. 
 
 ![infra](https://github.com/gnosia93/demo-cache/blob/master/document/infra-architecture.png)
 
