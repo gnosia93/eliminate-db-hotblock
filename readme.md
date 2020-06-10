@@ -261,7 +261,9 @@ On the contrast, in the right side senario, we use both Amazon Elasticache and a
 When new order is received, new order database record is inserted into aurora database table, 
 and update cache object value coresponding key (here, key is composed with new order's product number.)
 
-With ab, we will make order request from the our laptop.(incurred workload's concurrency is 150 and total volume of request is 3000 per one trial)
+With ab, we will make order request from the our laptop. 
+Incurred workload's concurrency is 150 and total volume of request is 3000 per one trial.
+
 
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
