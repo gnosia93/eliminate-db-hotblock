@@ -72,9 +72,7 @@ Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.
 https://aws.amazon.com/amazon-linux-2/
 $ 
 
-$ git clone https://github.com/gnosia93/demo-cache.git
-$ cd ~/demo-cache
-$ cd src/main/resources
+$ cd ~/demo-cache/src/main/resources
 $ vi application-prod.properties
 ```
 After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
@@ -101,7 +99,7 @@ At first execution of mvn package, it takes about 2 minitus for downing related 
 Goto init/sql directory, and then change <your-aurora-address> into yours.(refer to cloudformation outputs)
 ```
 $ cd ~/demo-cache
-$ mvn package
+$ mvn clean; mvn package       
 ```
 
 ### Preparing Sample DB ###
