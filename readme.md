@@ -82,49 +82,8 @@ AuroraCluster and Redis URL is used at JAVA springboot application configuration
 Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
 
-### Configure Web Server ###
-
-As you see our architecture diagram, web server need to comunicate with api load balancer, so you have to set up api endpoint of node.js application.
-Log into your web-server with ssh or compatible ssh client and then set up your api endpoint for node.js appliation
-You have to bear in mind that we have two web server.
-Please refer following instruction to do your settings.
-
-```
-$ ssh -i <your-pem-file> ec2-user@your-web-instance-dnsname
-
-The authenticity of host 'your-web-instance-dnsname (your-api-ip)' can't be established.
-ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'your-web-instance-dnsname' (ECDSA) to the list of known hosts.
-
-       __|  __|_  )
-       _|  (     /   Amazon Linux 2 AMI
-      ___|\___|___|
-
-https://aws.amazon.com/amazon-linux-2/
-$ 
-$ cd ~/demo-cache-front/config
-$ vi .env.prod
-```
-You have to change <your-api-endpoint> section with yours.
-You can find all required connection address from cloudformation stack outputs tab like above. 
-
-[.env.prod]
-```
-WS_SERVER_URL="ws://localhost"
-API_ENDPOINT="<your-api-endpoint>"
-```
-
-Goto project root directory and excute following commands. 
-```
-$ cd ~/demo-cache-front/
-$ curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
-$ sudo yum install -y nodejs
-$ sudo npm install cross-env -g
-$ npm audit fix
-$ sh run.sh 
-```
-
+At the moment, web server has a dependancy with backend API sever, 
+we will set up API server first rather than web server.
 
 ### Configure API Server ###
 
@@ -236,6 +195,50 @@ Load balancing functionality is mandatory for next benchmark step.
 like wise, if you don't watch output like above please check your configuration.
 
 
+### Configure Web Server ###
+
+As you see our architecture diagram, web server need to comunicate with api load balancer, so you have to set up api endpoint of node.js application.
+Log into your web-server with ssh or compatible ssh client and then set up your api endpoint for node.js appliation
+You have to bear in mind that we have two web server.
+Please refer following instruction to do your settings.
+
+```
+$ ssh -i <your-pem-file> ec2-user@your-web-instance-dnsname
+
+The authenticity of host 'your-web-instance-dnsname (your-api-ip)' can't be established.
+ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'your-web-instance-dnsname' (ECDSA) to the list of known hosts.
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+$ 
+$ cd ~/demo-cache-front/config
+$ vi .env.prod
+```
+You have to change <your-api-endpoint> section with yours.
+You can find all required connection address from cloudformation stack outputs tab like above. 
+
+[.env.prod]
+```
+WS_SERVER_URL="ws://localhost"
+API_ENDPOINT="http://<your-api-endpoint>"
+```
+
+Goto project root directory and excute following commands. 
+```
+$ cd ~/demo-cache-front/
+$ curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
+$ sudo yum install -y nodejs
+$ sudo npm install cross-env -g
+$ npm audit fix
+$ sh run.sh 
+```
+
+Now, web page is working too..
 
 ## BenchMarking##
 
