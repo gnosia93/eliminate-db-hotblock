@@ -14,8 +14,11 @@ In this demo, I want to share with you another use case of cache system for larg
 having frequent update about specific data items, which is saved in rdbms. 
 
 ~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
+
 ~~ 게시판 글수 카운트.
+
 ~~ 특정 상품에 대한 실시간 판매 건수 계산.
+
 ~~ wo
 
 We are going to go through how to eliminate database hotblock with amazon elasticache redis and
