@@ -23,7 +23,6 @@ Before diving deeply, I want to just introduce about AWS elastiCache for your un
 
 ![infra](https://github.com/gnosia93/demo-cache/blob/master/document/infra-architecture.png)
 
-ALB has two endpoint which port number is 80, 8080. 
 Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
 On the other hand, port 8080 is rest api endpoint to perform stress test with apache bench(AB).
 
@@ -35,7 +34,6 @@ and then Aurora database have two DB tables which name is product and order.
 * /site-address/order/add
 * /site-address/order/event-add
 
-<< architecture >>
 
 
 
@@ -60,7 +58,7 @@ Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, 
 
 ### Configure API Server ###
 
-In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database.
+In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database repectively. You have to bear in mind that we have two api server.
 Please refer following instruction to do your settings.
 
 ```
@@ -105,8 +103,8 @@ spring.redis.host=<your-redis-cluster-endpoint>
 
 In this project, we are using Aurora MySQL datbase which has only primary node,
 and making database tables, procedure and buidling sample data of product table.
-Please execute a command like below at ec2 instance console at either api server instances and
-you need to confirm product table's row count is 10000. 
+Please execute a command like below at the ec2 instance console of either api server instances 
+and you need to confirm product table's row count is 10000. 
 
 If you are good at MySQL database and compatibles, you can login Auroa RDS using mysql client and check sample schema,
 auto generated datas.
