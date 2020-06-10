@@ -310,11 +310,11 @@ After finishing setup order-db and order-redis shell, execute following command 
 Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
 
 ```
-$ ./order-db.sh 
+$ sh /order-db.sh 
 
 #[wait about 10 sec]
 
-$ ./order-redis.sh 
+$ sh /order-redis.sh 
 ```
 
 Below is execution output of ab. Time taken for tests value is total elapsed time since stress test started.
