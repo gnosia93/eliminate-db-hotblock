@@ -375,7 +375,15 @@ As you can see from the test results, With Redis Benchmark result is about 5 tim
 This test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
 
+
+![web-product](https://github.com/gnosia93/demo-cache/blob/master/document/web-product.png)
+
+Upper screen shot is product web UI page of this project, go to your web site of this project,
+check web result page after executing your benchmark test.
+
 If you need more detail test result, please test performance by different configuration yourself. 
+
+
 
 ## Conclusion ##
 
