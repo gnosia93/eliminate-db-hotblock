@@ -55,14 +55,23 @@ You can identify web, api endpoint url, and provisioned EC2 instances public add
 
 ![cf-outputs](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
 
-### Configure Appication ###
+### Configure API Server ###
 
 Addtionally you have to clone this repository from all your ec2 instances.
 Login into each ec2 instnaces and execute commands like followings.
 
+API 서버가 두대이므로, 동일한 작업을 한번 더 한다.
+
+----
+
+
+First, log into your api-server and then set your backend information like redis and aurora database connection.
+please refer following instruction to change your settings.
+
 ```
-$ ssh -i keypair-tokyo.pem ec2-user@ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com
-The authenticity of host 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com (13.114.101.172)' can't be established.
+$ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
+
+The authenticity of host 'your-api-instance-dnsname (your-api-ip)' can't be established.
 ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com,13.114.101.172' (ECDSA) to the list of known hosts.
@@ -73,11 +82,10 @@ Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.
 
 https://aws.amazon.com/amazon-linux-2/
 $ 
-
 $ cd ~/demo-cache/src/main/resources
 $ vi application-prod.properties
 ```
-After changing your current directory to resources, you have to modify configurations for aurora rds and redis.
+You have to change <your-aurora-writer-endpoint> and <your-redis-cluster-endpoint> to yours.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
 [application-prod.properties]
