@@ -144,7 +144,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 Now, We have done all the configuration and sample database building.
 Finally, execute run.sh to start spring boot java application and check if java web application is working properly.
-The result of wget must be like belows.
+The result of curl must be like belows, it must have to return json health checking result output.
 If you have any problem, please check [application-prod.properties] configuration file and tomcat.log in project root.
 
 ```
@@ -154,10 +154,7 @@ $ sh scripts/run.sh
 
 $ curl localhost
 {"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"ok","data":{"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"I am working!","data":""}}
-
-$ 
 ```
-run.sh shell command have a java application information, and if you 
 
 
 ## BenchMark Test ##
