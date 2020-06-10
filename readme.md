@@ -1,6 +1,8 @@
 
 # Improving Appication Performance with AWS ElastiCache #
 
+Cache System is usually used for the purpose of 
+
 - DB Result Caching
 - Session Store
 - Eliminating DB Hot Blocks when heavy transcation occurs in small range of data. 
