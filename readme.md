@@ -294,6 +294,12 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
+http-tools package is containing Apache Bench tool, If you are using Mac OS, install Apache Bench with homebrew like below.
+```
+$ brew install httpd-tools
+```
+
+
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
 
@@ -303,10 +309,6 @@ ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload
 
 - AB
 
-```
-$ yum install -y httpd-tools
-
-```
 
 * /site-address/order/add
 * /site-address/order/event-add
