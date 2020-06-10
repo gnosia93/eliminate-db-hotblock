@@ -264,8 +264,14 @@ $ brew install httpd-tools
 As shown above test architecture diagram, we have two kinds of test senario with ab.
 In the left side senario, we only use aurora rds whenever new order happens.
 On the contrast, in the right side senario, we use both Amazon Elasticache and aurora rds.
-When new order is received, new order database record is inserted into aurora database table, 
+When new order is received, new order is inserted into aurora database table, 
 and update cache object value coresponding key (here, key is composed with new order's product number.)
+
+There is two API endpoint url, /add is just only with rds, /event-add is working with both elasticach and rds for order processing.
+
+* /your-api-endpoint/order/add
+* /your-api-endpoint/order/event-add
+
 
 With ab, we will make order request from the our laptop. 
 Incurred workload's concurrency is 150 and total volume of request is 3000 per one trial.
@@ -357,8 +363,7 @@ Transfer rate:          60.43 [Kbytes/sec] received
 ```
 
 
-* /site-address/order/add
-* /site-address/order/event-add
+
 
 << Performance Graph >>
 
