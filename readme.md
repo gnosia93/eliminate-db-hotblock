@@ -140,7 +140,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 +-----------------+                                                 
 ```
 
-### Execute Application ###
+### Execute Application and Check the right result ###
 
 Now, We have done all the configuration and sample database building.
 Finally, execute run.sh to start spring boot java application and check if java web application is working properly.
@@ -155,6 +155,8 @@ $ sh scripts/run.sh
 $ curl localhost
 {"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"ok","data":{"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"I am working!","data":""}}
 ```
+
+Additionaly check web browser output which connect to api load balancer url. 
 
 
 ## BenchMark Test ##
