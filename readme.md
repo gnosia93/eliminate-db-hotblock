@@ -103,26 +103,17 @@ Warning: Permanently added 'your-web-instance-dnsname' (ECDSA) to the list of kn
 
 https://aws.amazon.com/amazon-linux-2/
 $ 
-$ cd ~/demo-cache/src/main/resources
-$ vi application-prod.properties
+$ cd ~/demo-cache-front/config
+$ vi .env.prod
 ```
-You have to change <your-aurora-writer-endpoint> and <your-redis-cluster-endpoint> to yours.
+You have to change <your-api-endpoint> section with yours.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
-[application-prod.properties]
+[.env.prod]
 ```
-spring.datasource.jdbc-url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
-spring.datasource.url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
-spring.datasource.username=demo
-spring.datasource.password=demo12345
-spring.datasource.maximum-pool-size=100
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-spring.redis.lettuce.pool.max-active=10
+WS_SERVER_URL="ws://localhost"
+API_ENDPOINT="<your-api-endpoint>"
 ```
-
 
 
 
