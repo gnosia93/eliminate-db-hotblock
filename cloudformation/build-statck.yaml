@@ -562,3 +562,4 @@ Outputs:
     Description: A reference to the created redis
     Value: !Join [ ":", [ !GetAtt ReplicationGroup.PrimaryEndPoint.Address, !GetAtt ReplicationGroup.PrimaryEndPoint.Port ] ]
     
+    
