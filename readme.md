@@ -247,12 +247,20 @@ Now, our web page is working..
 
 ## BenchMarking ##
 
-![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png){: with=300, height=300}
 
 Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hypertext Transfer Protocol (HTTP) web server. Although it is designed to measure the performance of Apache web server, yet it can also be used to test any other web server that is equally good. With this tool, you can quickly know how many requests per second your web server is capable of serving.
 
-You can find more detailed information on the site below.
-(https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm)
+If you want to find more detailed information about Apache Brench, please goto 
+https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm
+
+
+![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png){: with=300, height=300}
+
+As shown above test architecture diagram, we have two kinds of test senario with ab.
+In the left side senario, we only use aurora rds whenever new order happens.
+On the contrast, in the right side senario, we use both Amazon Elasticache and aurora rds.
+When new order is received, new order database record is inserted into aurora database table, 
+and update cache object value coresponding key (here, key is composed with new order's product number.)
 
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
