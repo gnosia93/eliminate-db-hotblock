@@ -156,10 +156,12 @@ $ curl localhost
 {"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"ok","data":{"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"I am working!","data":""}}
 ```
 
-Additionaly check web browser output which connect to api load balancer url. 
-for working properly, api load balancing is mandatory    
+Also check web browser output connecting to api load balancer endpoint. 
+Load balancing functionality is mandatory for performance test.    
 
 ![browser-output](https://github.com/gnosia93/demo-cache/blob/master/document/brower-ouput.png)
+
+
 
 ## BenchMark Test ##
 
