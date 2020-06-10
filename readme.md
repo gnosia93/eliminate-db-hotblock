@@ -11,9 +11,12 @@ java springboot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
 java language, you can easily catch up with details.
 
+discla...
 
-### Business Problems ###
-
+this is just one possible use case of elasticache redis, and we will use java spring boot wonderful function
+which support global transcation between other type storage backend.
+I am not sure there is another language or framework like spring boot which support global transcation.
+In a spring boot framework, it provide global transcation as a proxy form.
 
 ## ElastiCache Briefs ##
 
@@ -144,6 +147,9 @@ Now, We have done all the configuration and sample database building.
 Finally, execute run.sh to start spring boot java application and check if java web application is working properly.
 The result of curl must be like belows, it must have to return json health checking result output.
 If you have any problem, please check [application-prod.properties] configuration file and tomcat.log in project root.
+After you modify your miss configuration, you need to execute mvn clean and mvn package at the root of this project.
+Because [application-prod.properties] file is bundled with execution jar, you need to clean a previous jar artifact and
+do a re-packaging new one with right property configuration.
 
 ```
 $ cd ~/demo-cache
