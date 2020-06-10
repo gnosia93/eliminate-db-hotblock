@@ -6,12 +6,13 @@ cache system have some portion of large scale web application.
 Cache System is usually used for the purpose  
 
 * DB Result Caching
-* Session Store or temporary store for product recommendation 
+* Session Store 
 * Hot read data with stale ..
  
-In this project, I want to share with you how to 
+In this project, I want to share with you another use case of cache system for large scale web application
+and 
 
-- Eliminating DB Hot Blocks with heavy transcation of in small range of data. 
+- how to eliminating DB Hot Blocks with heavy transcation of in small range of data. 
 
 
 
