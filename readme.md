@@ -164,7 +164,7 @@ like wise, if you don't watch output like above please check your configuration.
 
 
 
-## BenchMark Test ##
+## BenchMarking##
 
 ![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png){: with=300, height=300}
 
