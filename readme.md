@@ -371,6 +371,8 @@ Transfer rate:          60.43 [Kbytes/sec] received
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
 
 
+As you can see from the test results, With Cache Benchmark is about 5 times faster than DB only.
+
 
 ## Conclusion ##
 
