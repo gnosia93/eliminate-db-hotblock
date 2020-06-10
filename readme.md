@@ -300,7 +300,61 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-#### Executing ab ####
+After finishing setup order-db and order-redis shell, execute following command in order.
+Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
+
+```
+$ ./order-db.sh 
+
+#[wait about 10 sec]
+
+$ ./order-redis.sh 
+```
+
+Below is execution output of ab. Time taken for tests value is total elapsed time since stress test started.
+Compare between order-db.sh and order-redis.sh ouput.
+
+```
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking cachedemo-api-alb-177367678.ap-northeast-1.elb.amazonaws.com (be patient)
+Completed 300 requests
+Completed 600 requests
+Completed 900 requests
+Completed 1200 requests
+Completed 1500 requests
+Completed 1800 requests
+Completed 2100 requests
+Completed 2400 requests
+Completed 2700 requests
+Completed 3000 requests
+Finished 3000 requests
+
+
+Server Software:        
+Server Hostname:        cachedemo-api-alb-177367678.ap-northeast-1.elb.amazonaws.com
+Server Port:            80
+
+Document Path:          /order/add
+Document Length:        Variable
+
+Concurrency Level:      150
+Time taken for tests:   25.471 seconds
+Complete requests:      3000
+Failed requests:        0
+Total transferred:      1576224 bytes
+Total body sent:        1143000
+HTML transferred:       994224 bytes
+Requests per second:    117.78 [#/sec] (mean)
+Time per request:       1273.557 [ms] (mean)
+Time per request:       8.490 [ms] (mean, across all concurrent requests)
+Transfer rate:          60.43 [Kbytes/sec] received
+                        43.82 kb/s sent
+                        104.25 kb/s total
+
+```
 
 
 * /site-address/order/add
