@@ -81,6 +81,10 @@ You can easily identify web, api endpoint, and provisioned EC2 instances public 
 AuroraCluster and Redis URL is used at JAVA springboot application configuration.
 Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
+<< spec >>
+
+
+
 
 At the moment, web server has a dependancy with backend API sever, 
 we will set up API server first rather than web server.
