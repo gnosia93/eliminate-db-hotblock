@@ -372,9 +372,13 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 
 As you can see from the test results, With Cache Benchmark is about 5 times faster than DB only.
+This test result can be varied with difference ab parameter(total request and concurrency)
+and infra structure spec like rds VM size and IO capacity, and api server spec.
 
+If you need more detail test result, please test performance by different configuration yourself. 
 
 ## Conclusion ##
+
 
 
 ### Addtional Contents (Planned) ##
