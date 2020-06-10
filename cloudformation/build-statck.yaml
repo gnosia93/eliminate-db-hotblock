@@ -423,7 +423,7 @@ Resources:
       VpcId: !Ref VPC
       HealthCheckIntervalSeconds: 30
       HealthCheckPath: /
-      HealthCheckPort: 8080
+      HealthCheckPort: 80
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
