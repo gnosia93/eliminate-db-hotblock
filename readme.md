@@ -168,14 +168,10 @@ $ yum install -y httpd-tools
 << Performance Graph >>
 
 
-### Pricing ###
-
-- Well Architected.
-
-
-### Addtional Contents ##
+### Addtional Contents (Planned) ##
 
 - develop material in HA cases, how it works and how many times is required for completion of HA
 
 - deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
+- pricing comparison (Well Architected view)
