@@ -15,7 +15,7 @@ Usually the common use case of cache system is divided into three category blows
 * Session Store 
 * Hot read with stale data
  
-In this demo, I want to share with you another use case of cache system for large scale web application
+In this Scenario, I am going to share with you another use case of cache system for large scale web application
 having frequent update about specific data items, which is saved in rdbms. 
 
 ~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
