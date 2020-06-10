@@ -155,9 +155,12 @@ $ curl localhost
 ```
 
 Also check web browser output connecting to api load balancer endpoint. 
-Load balancing functionality is mandatory for performance test.    
+Load balancing functionality is mandatory for next benchmark step.    
 
 ![browser-output](https://github.com/gnosia93/demo-cache/blob/master/document/brower-ouput.png)
+
+
+like wise, if you don't watch output like above please check your configuration.
 
 
 
