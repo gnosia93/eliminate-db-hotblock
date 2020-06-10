@@ -36,7 +36,7 @@ java language, you can easily catch up with details.
 ### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
-For reducing database burden under a heavy transation environment, we just leverage java spring boot transaction management  which support global transcations among different storage backend system(in this case between aurora rdbms and redis)*
+For reducing database burden under a heavy transation environment, we just leverage java spring boot's proxy based transaction management which support transcations among different storage backend system(in this case between aurora rdbms and redis)*
 
 *Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover mechanism is DNS level failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod time(failover time).
