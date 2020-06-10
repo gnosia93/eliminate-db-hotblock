@@ -81,6 +81,53 @@ You can easily identify web, api endpoint, and provisioned EC2 instances public 
 AuroraCluster and Redis URL is used at JAVA springboot application configuration.
 Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
+
+### Configure Web Server ###
+
+As you see our architecture diagram, web server need to comunicate with api load balancer, so you have to set up api endpoint of node.js application.
+Log into your web-server with ssh or compatible ssh client and then set up your api endpoint for node.js appliation
+You have to bear in mind that we have two web server.
+Please refer following instruction to do your settings.
+
+```
+$ ssh -i <your-pem-file> ec2-user@your-web-instance-dnsname
+
+The authenticity of host 'your-web-instance-dnsname (your-api-ip)' can't be established.
+ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'your-web-instance-dnsname' (ECDSA) to the list of known hosts.
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+$ 
+$ cd ~/demo-cache/src/main/resources
+$ vi application-prod.properties
+```
+You have to change <your-aurora-writer-endpoint> and <your-redis-cluster-endpoint> to yours.
+You can find all required connection address from cloudformation stack outputs tab like above. 
+
+[application-prod.properties]
+```
+spring.datasource.jdbc-url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://<your-aurora-writer-endpoint>:3306/shop?serverTimezone=UTC
+spring.datasource.username=demo
+spring.datasource.password=demo12345
+spring.datasource.maximum-pool-size=100
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+spring.redis.lettuce.pool.max-active=10
+```
+
+
+
+
+
+
 ### Configure API Server ###
 
 In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database repectively. You have to bear in mind that we have two api server.
