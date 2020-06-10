@@ -3,6 +3,11 @@
 
 Today's application is ... 
 
+현대의 웹어플리케이션은 복잡하고, 빠른 성능을 제공해야 하며, 이벤트시 몰려서 죽거나.. 한다.
+
+그래서 케시 시스템은 이러한 문제를 방지하기 위한 솔루션으로 자주 사용되어 지곤 한다..
+
+
 Cache system have some portion of large scale web application.
 Usually the common use case of cache system is divided into three category blows.  
 
