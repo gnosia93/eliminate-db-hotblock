@@ -81,10 +81,6 @@ You can easily identify web, api endpoint, and provisioned EC2 instances public 
 AuroraCluster and Redis URL is used at JAVA springboot application configuration.
 Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
-<< spec >>
-
-
-
 
 At the moment, web server has a dependancy with backend API sever, 
 we will set up API server first rather than web server.
@@ -374,8 +370,16 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
 
+* DB 성능정보를 보여준다. (CPU, IO ???, lock ???)
+
+
+we used following spec.. << spec >>
+스팩표를 나열한다.
+
+
 
 As you can see from the test results, With Redis Benchmark result is about 5 times faster than DB only.
+
 This test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
 
