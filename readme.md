@@ -239,9 +239,13 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
-Now, web page is working too..
+Now, our web page is working..
 
-## BenchMarking##
+<< 첫화면 그림>>
+
+
+
+## BenchMarking ##
 
 ![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png){: with=300, height=300}
 
