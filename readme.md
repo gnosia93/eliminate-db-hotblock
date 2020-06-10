@@ -157,7 +157,7 @@ $ curl localhost
 ```
 
 Additionaly check web browser output which connect to api load balancer url. 
-
+![browser-output](https://github.com/gnosia93/demo-cache/blob/master/document/brower-ouput.png)
 
 ## BenchMark Test ##
 
