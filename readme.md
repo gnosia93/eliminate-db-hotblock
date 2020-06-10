@@ -220,7 +220,7 @@ $
 $ cd ~/demo-cache-front/config
 $ vi .env.prod
 ```
-You have to change <your-api-endpoint> section with yours.
+replace `<your-api-endpoint>` section with your configuration.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
 [.env.prod]
