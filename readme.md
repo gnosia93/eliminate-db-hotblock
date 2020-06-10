@@ -107,7 +107,7 @@ $
 $ cd ~/demo-cache/src/main/resources
 $ vi application-prod.properties
 ```
-You have to change <your-aurora-writer-endpoint> and <your-redis-cluster-endpoint> to yours.
+Replace `<your-aurora-writer-endpoint>` and `<your-redis-cluster-endpoint>` to your configuration.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
 [application-prod.properties]
@@ -220,7 +220,7 @@ $
 $ cd ~/demo-cache-front/config
 $ vi .env.prod
 ```
-replace `<your-api-endpoint>` section with your configuration.
+Replace `<your-api-endpoint>` section with your configuration.
 You can find all required connection address from cloudformation stack outputs tab like above. 
 
 [.env.prod]
