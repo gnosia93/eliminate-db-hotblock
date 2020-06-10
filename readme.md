@@ -11,7 +11,7 @@ java springboot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
 java language, you can easily catch up with details.
 
-*Disclaimer* 
+### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
 For reducing database burden under a heavy transation environment, we just leverage java spring boot transaction management  which support global transcations among different storage backend system(in this case between aurora rdbms and redis)*
