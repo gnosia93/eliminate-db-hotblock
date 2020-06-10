@@ -394,7 +394,9 @@ If you need more detail test result, please test performance by different config
 
 
 
-### Addtional Contents (Planned) ##
+
+
+## Addtional Contents (Planned) ##
 
 - develop material in HA cases, how it works and how many times is required for completion of HA
 
@@ -402,4 +404,4 @@ If you need more detail test result, please test performance by different config
 
 - pricing comparison (Well Architected view)
 
-- 일관성 테스트...
+- Consistency testing in the case of various Incident cases.
