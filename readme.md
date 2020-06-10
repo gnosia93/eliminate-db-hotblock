@@ -151,7 +151,11 @@ If you have any problem, please check [application-prod.properties] configuratio
 $ cd ~/demo-cache
 $ mvn clean; mvn package
 $ sh scripts/run.sh
-$ wget localhost
+
+$ curl localhost
+{"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"ok","data":{"localDateTime":"2020-06-10T12:00:40.45","code":200,"message":"I am working!","data":""}}
+
+$ 
 ```
 run.sh shell command have a java application information, and if you 
 
