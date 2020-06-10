@@ -222,3 +222,5 @@ $ yum install -y httpd-tools
 - deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
 - pricing comparison (Well Architected view)
+
+- 일관성 테스트...
