@@ -157,11 +157,13 @@ $ curl localhost
 ```
 
 Additionaly check web browser output which connect to api load balancer url. 
+for working properly, api load balancing is mandatory    
+
 ![browser-output](https://github.com/gnosia93/demo-cache/blob/master/document/brower-ouput.png)
 
 ## BenchMark Test ##
 
-![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png)
+![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png){: with=300, height=300}
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
 
