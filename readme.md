@@ -52,18 +52,14 @@ and sharing same public subnet of VPC for supporting simple performance test fro
 
 ![infra](https://github.com/gnosia93/demo-cache/blob/master/document/infra-architecture.png)
 
-Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
-On the other hand, port 8080 is rest api endpoint to perform stress test with apache bench(AB).
+Port 80 is service endpoint for both web user and json api. 
+You can order certain product with using both web user interface and json api call. 
 
-Under the ALB, there are two EC2 instnaces which contain react for ui and springboot for api.
+Under the ALB respectively, there are two EC2 instnaces which contain node.js web application or api service which is implemented with spring boot.
+
 At the data layer, we have Amazon Elasticache for redis which have cache objects counting product selling
-and auroa database cluster which is composed of one master node, no replica.
-and then Aurora database have two DB tables which name is product and order.
-
-* /site-address/order/add
-* /site-address/order/event-add
-
-
+and auroa database cluster which is composed of just one master node, no replica.
+and Aurora database have two DB tables which name is product and order to handle our senarios.
 
 
 ## Infrastructure Building ##
@@ -212,6 +208,9 @@ like wise, if you don't watch output like above please check your configuration.
 $ yum install -y httpd-tools
 
 ```
+
+* /site-address/order/add
+* /site-address/order/event-add
 
 << Performance Graph >>
 
