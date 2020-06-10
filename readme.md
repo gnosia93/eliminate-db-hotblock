@@ -380,7 +380,11 @@ and infra structure spec like rds VM size and IO capacity, and api server spec.
 
 Upper screen shot is product web UI page of this project, go to your web site of this project,
 check web result page after executing your benchmark test.
-[이벤트건수]
+
+* [구매건수] : total order count of this product, which count is updated in dbms table. 
+
+* [이벤트구매건수] : total order count of this product, which count is updated with redis cache.
+
 
 If you need more detail test result, please test performance by different configuration yourself. 
 
