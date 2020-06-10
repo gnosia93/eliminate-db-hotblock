@@ -52,10 +52,10 @@ and sharing same public subnet of VPC for supporting simple performance test fro
 
 ![infra](https://github.com/gnosia93/demo-cache/blob/master/document/infra-architecture.png)
 
-Port 80 is service endpoint for both web user and json api. 
-You can order certain product with using both web user interface and json api call. 
+There is two internet facing ALB. the one is for web interface and the other is for json API.
+They both service with port 80 and you can order certain product with both web user interface and json api call. 
 
-Under the ALB respectively, there are two EC2 instnaces which contain node.js web application or api service which is implemented with spring boot.
+Under the ALB, there are two EC2 instnaces which contain node.js web application or api service which is implemented with spring boot application respectively.
 
 At the data layer, we have Amazon Elasticache for redis which have cache objects counting product selling
 and auroa database cluster which is composed of just one master node, no replica.
