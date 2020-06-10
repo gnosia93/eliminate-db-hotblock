@@ -146,7 +146,9 @@ $ tail -f tomcat.log
 // check if appliction is working correctly.
 
 
-## BenchMark ##
+## BenchMark Test ##
+
+<< 테스트 아키텍처 >>
 
 * AB 에 대한 간략한 설명 및 노트북 인스톨
 
