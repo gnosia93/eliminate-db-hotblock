@@ -27,7 +27,7 @@ java language, you can easily catch up with details.
 *This is just another applicable use case with Amazon Elasticache for redis.
 For reducing database burden under a heavy transation environment, we just leverage java spring boot transaction management  which support global transcations among different storage backend system(in this case between aurora rdbms and redis)*
 
-*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover is working as DNS level.
+*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover mechanism is DNS level failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod time(failover time).
 So this use case is not suitable for your application workload. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web scale services.* 
 
