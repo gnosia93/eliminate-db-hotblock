@@ -398,7 +398,7 @@ If you need more detail test result, please test performance by different config
 
 ## Addtional Contents (Planned) ##
 
-- develop material in HA cases, how it works and how many times is required for completion of HA
+- develop material in HA cases, how it works and how much time takes for completion of HA
 
 - deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
