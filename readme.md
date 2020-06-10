@@ -41,19 +41,22 @@ and then Aurora database have two DB tables which name is product and order.
 
 ## Infrastructure Building ##
 
-### Infra Provisioning ###
+### Infra Provisioning /w CloudFormation ###
 
 Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
 
-Go to AWS Cloudformation console, and with stack-build.yaml you need to build infrasture of this project. 
-Normally it takes roughly 10 minitues for all infra provisioning.
+Go to AWS Cloudformation console, and build build infrasture of this project with stack-build.yaml.
+Normally it takes about 10 minitues for all infra provisioning.
 If you are not good at AWS Cloudformation, refer to this URL (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html)
 
-Below screen is the example outputs of cloudformation which can be founded at statck menu.
-You can identify web, api endpoint url, and provisioned EC2 instances public address, etc.
+Below screen is the sample outputs of cloudformation which can be founded at stack menu.
+You can easily identify web, api endpoint, and provisioned EC2 instances public address, etc.
 
 ![cf-outputs](https://github.com/gnosia93/demo-cache/blob/master/document/cf-outputs.png)
+
+AuroraCluster and Redis URL is used at JAVA springboot application configuration.
+Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, which service port 80.
 
 ### Configure API Server ###
 
