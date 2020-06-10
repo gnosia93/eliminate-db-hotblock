@@ -173,4 +173,9 @@ $ yum install -y httpd-tools
 - Well Architected.
 
 
+### Addtional Contents ##
+
+- develop material in HA cases, how it works and how many times is required for completion of HA
+
+- deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
