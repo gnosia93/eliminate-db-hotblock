@@ -11,14 +11,14 @@ java springboot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
 java language, you can easily catch up with details.
 
-~disclaimer 
+*disclaimer 
 this is just one possible use case of elasticache redis, and we will use java spring boot wonderful function
 which support global transcation between other type storage backend.
 I am not sure there is another language or framework like spring boot which support global transcation.
-In a spring boot framework, it provide global transcation as a proxy form.
+In a spring boot framework, it provide global transcation as a proxy form.*
 
-Altough amazon elasticache for redis support HA configuration, but it is just working as DNS failover.
-So when primary instnace is abnormaly shutdown, service is not available for failover time. 
+*Altough amazon elasticache for redis support HA configuration, but it is just working as DNS failover.
+So when primary instnace is abnormaly shutdown, service is not available for failover time.* 
 
 ## ElastiCache Briefs ##
 
