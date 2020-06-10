@@ -45,6 +45,10 @@ So this use case is not suitable for your application workload. But by walking t
 
 ## Architecture ##
 
+This is simple architecture of 3 tier web application. but in the backend storage, Amazon Elasticache  for redis is occupied to eliminate database hot block which reduce web application performance severly.
+
+Both Web and Api System have a public end point(public dnsname) respectively for supporting simple test from outside of Amazon VPC. 
+
 ![infra](https://github.com/gnosia93/demo-cache/blob/master/document/infra-architecture.png)
 
 Port 80 is service endpoint for web user interface, in there you can add and select procuct, order information.
