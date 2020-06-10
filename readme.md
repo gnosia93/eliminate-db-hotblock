@@ -26,6 +26,8 @@ having frequent update about specific data items, which is saved in rdbms.
 
 ~~ wo
 
+케시를 사용하면 얼마나 빠르고, 비용효율적인를 보여주겠다..
+
 We are going to go through how to eliminate database hotblock with amazon elasticache redis and
 java spring boot web application.
 We don't deal with application implementation details in here, but If you are either developer or someone who can read
