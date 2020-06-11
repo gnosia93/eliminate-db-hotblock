@@ -12,7 +12,7 @@ But if you meet performance degrations with narrow range of hot write, it is not
 
 Databse sharding or adoption of NOSQL could be one candidate solution, but 
 What if the update is concentrated on one or two items,
-it become big service problem and eventually couble be connected with your business risk. 
+it become big service problem and eventually could be connected with your business risk. 
 
 In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
 and demonstrate performnce gain when you replace database update operation into redis key update.
