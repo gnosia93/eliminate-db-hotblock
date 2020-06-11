@@ -1,22 +1,16 @@
 
 # Eliminating Database Hot Blocks with with AWS ElastiCache #
 
-Today's application is ... 
+Cache System have significant portion at large scale modern web application.
+As users are glowing timely, all application meet significant performance issues, especially rdbms area.
+for heavy read or heavy write workload with wide range of items, we can easy mitigate performance bottlneck with mamy solutions, but if you meet performance issues with narrow range of hot write dataset,
+it is not easy to deal with.
 
-현대의 웹어플리케이션은 복잡하고, 빠른 성능을 제공해야 하며, 이벤트시 몰려서 죽거나.. 한다.
+Databse sharding or adoption of NOSQL could be one candidate solution, but update to certain items ..
+it is another service issues and connect to your business risk. 
 
-그래서 케시 시스템은 이러한 문제를 방지하기 위한 솔루션으로 자주 사용되어 지곤 한다..
-
-
-Cache system have some portion of large scale web application.
-Usually the common use case of cache system is divided into three category blows.  
-
-* DB Result Caching
-* Session Store 
-* Hot read with stale data
- 
-In this Scenario, I am going to share with you another use case of cache system for large scale web application
-having frequent update about specific data items, which is saved in rdbms. 
+In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
+and demonstrate performnce gain when you replace database update operation into redis memory base update.
 
 ~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
 
