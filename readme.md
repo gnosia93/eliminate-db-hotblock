@@ -384,7 +384,7 @@ Transfer rate:          60.43 [Kbytes/sec] received
 This benchmarking use follwing test spec servers
 
 - Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
-- Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderae Network Speed), 
+- Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
 - One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
