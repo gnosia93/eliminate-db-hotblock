@@ -418,16 +418,16 @@ check web result page after executing your benchmark test.
 
 So far, we've seen how to eliminate hot blocks from a database using Amazon Elasticache for redis.
 In addition to removing hot block contention from the database, as we saw earlier, there are other performance improvements
-in this architecture.
+in this architecture.  
 I hope this architecture pattern help your business in the future.
 
 
 ## Addtional Contents (Planned) ##
 
-- develop material in HA cases, how it works and how much time takes for completion of HA
+- develop material in HA cases, how it works and how much time takes for completion of HA.
 
 - deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
-- pricing comparison (Well Architected view)
+- cost comparison.
 
 - Consistency testing in the case of various Incident cases.
