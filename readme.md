@@ -408,11 +408,8 @@ Former graph case is DB only test case, later is test case with Amazone Elastica
 
 As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only.
 
-Test result can be varied with difference ab parameter(total request and concurrency)
+Remeber that test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
-
-
-
 
 
 ![web-product](https://github.com/gnosia93/demo-cache/blob/master/document/web-product.png)
