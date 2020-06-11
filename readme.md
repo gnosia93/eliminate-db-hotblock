@@ -4,7 +4,7 @@
 
 The cache system occupies part of the modern web applications regardless of the scale of services.    
 As the number of users increases and various events are held for enlarging sales revenues without any patterns frequently,
-Many application services become to face critical performance problems, especially with database area.
+Many application services become to face critical performance issues, especially int the area of database system.
 
 For normal heavy read and write bottleneck with wide range of items,
 we can easy mitigate or eliminate performance problems with variouse solutions.
