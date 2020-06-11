@@ -411,7 +411,7 @@ Former graph case is DB only test case, later is test case with Amazone Elastica
 * Time taken for tests:   5.861 seconds   (right side senario, both elasticache and aurora rds)
 
 
-As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only.
+<span style="color:blue"> As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only. </span>
 
 Remeber that test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
