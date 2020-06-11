@@ -15,22 +15,7 @@ What if an update is concentrated on one or two items,
 it become big service issues and can be connected with your business risk. 
 
 In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
-and demonstrate performnce gain when you replace database update operation into redis memory base update.
-
-~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
-
-~~ 게시판 글수 카운트.
-
-~~ 특정 상품에 대한 실시간 판매 건수 계산.
-
-~~ wo
-
-케시를 사용하면 얼마나 빠르고, 비용효율적인를 보여주겠다..
-
-We are going to go through how to eliminate database hotblock with amazon elasticache redis and
-java spring boot web application.
-We don't deal with application implementation details in here, but If you are either developer or someone who can read
-java language, you can easily catch up with details.
+and demonstrate performnce gain when you replace database update operation into redis key update.
 
 ### *Disclaimer* ### 
 
