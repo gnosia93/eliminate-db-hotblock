@@ -3,7 +3,7 @@
 
 
 The cache system occupies part of the modern web applications regardless of the scale of services.    
-As the number of users increases and various events are held to increase sales volumes frequently without any patterns,
+As the number of users increases and various events are held for enlarging sales revenues frequently without any patterns,
 Many application services become to face critical performance problems, especially with database area.
 
 For normal heavy read and write bottleneck with wide range of items,
