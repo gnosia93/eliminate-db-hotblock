@@ -381,14 +381,22 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 ## BenchMarking Result ##
 
+We use two API server which instance type is m5d.large(2 vCPU, 9G RAM)
+and cache.m3.medium(3GB, Moderae Network Speed), 
+db.r5.large(2 vCPU, 16GB RAM)
+
+
 * Time taken for tests:   25.471 seconds  (left side senario, only use aurora rds)
 * Time taken for tests:   5.861 seconds  (right side senario, use both elasticache and aurora rds)
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
 
 When we use datbase with Elasticache, CPU usage is more low. 
+
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
+
 and there is no DML latency.
+
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
 
