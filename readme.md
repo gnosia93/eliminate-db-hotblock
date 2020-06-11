@@ -308,7 +308,7 @@ ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload
 This is our benchmark test payload, default payload use productId 1004, other attributes is not import,
 If you want to change productId ordered, make sure corresponding productId exists in database,
 in default implementation, you can use productId between 1 to 10000. 
-And also This payload is equal in both order-redis and order-db.
+And also both order-redis and order-db shell command use same payload.
 ```
 {
    "orderId": 0,
