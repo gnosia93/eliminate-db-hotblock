@@ -387,16 +387,17 @@ This benchmarking use follwing test spec servers
 - Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
 - One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
-* Elapsed Time
+
+#### Elapsed Time ####
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
 
 
-* CPU Usage 
+#### CPU Usage #### 
 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
 
-* DML Latency
+#### DML Latency ####
 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
