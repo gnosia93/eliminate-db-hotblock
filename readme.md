@@ -11,7 +11,7 @@ we can easily mitigate or eliminate performance problems with various solutions.
 But if you meet performance degrations with narrow range of hot write, it is not easy to deal with.
 
 Databse sharding or adoption of NOSQL could be one candidate solution, but 
-What if an update is concentrated on one or two items,
+What if the update is concentrated on one or two items,
 it become big service issues and can be connected with your business risk. 
 
 In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
