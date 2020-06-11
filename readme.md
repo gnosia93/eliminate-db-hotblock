@@ -381,33 +381,38 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 ## BenchMarking Result ##
 
-This benchmarking use follwing servers
+This benchmarking use follwing test spec servers
 
-* Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
-* Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderae Network Speed), 
-* One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
-
-
-* Time taken for tests:   25.471 seconds  (left side senario, only use aurora rds)
-* Time taken for tests:   5.861 seconds  (right side senario, use both elasticache and aurora rds)
+- Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
+- Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderae Network Speed), 
+- One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
 
-When we use datbase with Elasticache, CPU usage is more low. 
+* CPU Usage 
 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
 
-and there is no DML latency.
+* DML Latency
 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
+Former graph case is DB only test case, later is test case with Amazone Elasticache.
 
+
+[Test Result]
+
+* Time taken for tests:   25.471 seconds  (left side senario, only aurora rds)
+* Time taken for tests:   5.861 seconds   (right side senario, both elasticache and aurora rds)
 
 
 As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only.
 
-This test result can be varied with difference ab parameter(total request and concurrency)
+Test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
+
+
+
 
 
 ![web-product](https://github.com/gnosia93/demo-cache/blob/master/document/web-product.png)
