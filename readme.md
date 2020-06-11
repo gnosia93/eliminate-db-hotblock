@@ -1,5 +1,5 @@
 
-## Eliminating Database Hot Blocks with with Amazon ElastiCache ##
+## Eliminating Database Hot Blocks with Amazon ElastiCache ##
 
 
 The cache system occupies part of the modern web applications regardless of the scale of services.    
