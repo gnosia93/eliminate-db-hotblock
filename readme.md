@@ -305,20 +305,22 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-** 페이로드 파일에 대해 설명한다.
-
-동일한 상품에 대해서, 동일한 페이로드를 사용하여 테스트 함을 알려준다.
-
-다른 상품에 대해서 테스트 하고자 하는 경우 product_id 만 바꾸면 된다고 얘기하고, 대신 상품 번호는 최대수치가 10000 이다.
-
-물론 더 큰 상품 번호가 있는 경우 해당 상품번호를 입력하면 된다고 얘기해 주고.
-
-만약 존재하지 않는 상품 번호를 입력하게 되면, 테스트는 실퍠한다고 얘기한다.. (주의요망)
-
-
-
-
-
+This is our benchmark test payload, default payload use productId 1004, other attributes is not import,
+If you want to change productId ordered, make sure corresponding productId exists in database,
+in default implementation, you can use productId between 1 to 10000. 
+And also This payload is equal in both order-redis and order-db.
+```
+{
+   "orderId": 0,
+   "productId": 1004,
+   "orderPrice": 1000,
+   "payStatus": null,
+   "orderDate": null,
+   "payDate": null,
+   "errorDate": null,
+   "errorMessage": null
+}
+```
 
 After finishing setup order-db and order-redis shell, execute following command in order.
 Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
