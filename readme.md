@@ -405,7 +405,7 @@ This benchmarking use follwing test spec servers
 Former graph case is DB only test case, later is test case with Amazone Elasticache.
 
 
-[Test Result]
+#### [Test Result] ####
 
 * Time taken for tests:   25.471 seconds  (left side senario, only aurora rds)
 * Time taken for tests:   5.861 seconds   (right side senario, both elasticache and aurora rds)
