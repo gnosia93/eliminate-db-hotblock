@@ -23,7 +23,7 @@ For reducing database burden under a heavy transation environment, we just lever
 
 *Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
-So this use case is not suitable for your application workload. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web scale services.* 
+So this use case couble be insuitable for your business cases. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web scale services.* 
 
 
 ## Architecture ##
