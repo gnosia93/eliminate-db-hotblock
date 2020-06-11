@@ -1,11 +1,14 @@
 
 ## Eliminating Database Hot Blocks with with Amazon ElastiCache ##
 
-Cache system have some portion of modern web application either large or small scale.
 
-As users are growing time to time, all application meet significant performance issues, especially rdbms area.
-for heavy read or heavy write workload with wide range of items, we can easy mitigate performance bottlneck with mamy solutions, but if you meet performance issues with narrow range of hot write dataset,
-it is not easy to deal with.
+The cache system occupies part of the modern web applications regardless of service scale.
+As the number of users increases and various events are held to increase sales frequently,
+Many application services become to face critical performance problems, especially with database area.
+
+For normal heavy read and write bottleneck with wide range of items,
+we can easy mitigate or eliminate performance problems with mamy solutions.
+But if you meet performance issues with narrow range of hot write dataset, it is not easy to deal with.
 
 Databse sharding or adoption of NOSQL could be one candidate solution, but update to certain items ..
 it is another service issues and connect to your business risk. 
