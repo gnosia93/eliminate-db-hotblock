@@ -415,6 +415,7 @@ As you can see from the test results, With Redis Benchmark result is about 4.3 t
 
 Remeber that test result can be varied with difference ab parameter(total request and concurrency)
 and infra structure spec like rds VM size and IO capacity, and api server spec.
+If you need various test result, please do performance test with different configuration. 
 
 
 ![web-product](https://github.com/gnosia93/demo-cache/blob/master/document/web-product.png)
@@ -427,7 +428,6 @@ check web result page after executing your benchmark test.
 * [이벤트구매건수] : total order count of this product, which count is updated with redis cache.
 
 
-If you need more detail test result, please test performance by different configuration yourself. 
 
 
 
