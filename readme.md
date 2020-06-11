@@ -1,5 +1,5 @@
 
-# Improving Appication Performance with AWS ElastiCache #
+# Eliminating Database Hot Blocks with with AWS ElastiCache #
 
 Today's application is ... 
 
