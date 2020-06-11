@@ -7,11 +7,12 @@ As the number of users increases and various events are held to increase sales f
 Many application services become to face critical performance problems, especially with database area.
 
 For normal heavy read and write bottleneck with wide range of items,
-we can easy mitigate or eliminate performance problems with mamy solutions.
+we can easy mitigate or eliminate performance problems with variouse solutions.
 But if you meet performance issues with narrow range of hot write dataset, it is not easy to deal with.
 
-Databse sharding or adoption of NOSQL could be one candidate solution, but update to certain items ..
-it is another service issues and connect to your business risk. 
+Databse sharding or adoption of NOSQL could be one candidate solution, but 
+What if an update is concentrated on one or two items,
+it become big service issues and can be connected with your business risk. 
 
 In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
 and demonstrate performnce gain when you replace database update operation into redis memory base update.
