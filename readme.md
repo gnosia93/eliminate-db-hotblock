@@ -387,7 +387,10 @@ This benchmarking use follwing test spec servers
 - Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
 - One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
+* Elapsed Time
+
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
+
 
 * CPU Usage 
 
@@ -396,6 +399,7 @@ This benchmarking use follwing test spec servers
 * DML Latency
 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
+
 
 Former graph case is DB only test case, later is test case with Amazone Elasticache.
 
