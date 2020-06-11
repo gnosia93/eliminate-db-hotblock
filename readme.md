@@ -385,14 +385,12 @@ Transfer rate:          60.43 [Kbytes/sec] received
 * Time taken for tests:   5.861 seconds  (right side senario, use both elasticache and aurora rds)
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
+
+When we use datbase with Elasticache, CPU usage is more low. 
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
+and there is no DML latency.
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
-* DB 성능정보를 보여준다. (CPU, IO ???, lock ???)
-
-
-we used following spec.. << spec >>
-스팩표를 나열한다.
 
 
 
