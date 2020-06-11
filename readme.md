@@ -385,6 +385,8 @@ Transfer rate:          60.43 [Kbytes/sec] received
 * Time taken for tests:   5.861 seconds  (right side senario, use both elasticache and aurora rds)
 
 ![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
+![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
+![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
 * DB 성능정보를 보여준다. (CPU, IO ???, lock ???)
 
