@@ -1,5 +1,5 @@
 
-# Eliminating Database Hot Blocks with with AWS ElastiCache #
+## Eliminating Database Hot Blocks with with Amazon ElastiCache ##
 
 Cache System have significant portion at large scale modern web application.
 As users are glowing timely, all application meet significant performance issues, especially rdbms area.
