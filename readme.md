@@ -239,10 +239,9 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
-Now, our web page is working..
+Now, our web site is working..
 
-<< 첫화면 그림>>
-
+![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
 
 
 ## BenchMarking ##
