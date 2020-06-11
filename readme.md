@@ -8,7 +8,7 @@ Many application services become to face critical performance issues, especially
 
 For normal heavy read or write bottleneck with wide range of items,
 we can easily mitigate or eliminate performance problems with various solutions.
-But if you meet performance issues with narrow range of hot write dataset, it is not easy to deal with.
+But if you meet performance degrations with narrow range of hot write, it is not easy to deal with.
 
 Databse sharding or adoption of NOSQL could be one candidate solution, but 
 What if an update is concentrated on one or two items,
