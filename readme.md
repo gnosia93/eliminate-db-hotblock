@@ -7,7 +7,7 @@ As the number of users increases and various events are held for enlarging sales
 Many application services become to face critical performance issues, especially in the area of database system.
 
 For normal heavy read or write bottleneck with wide range of items,
-we can easy mitigate or eliminate performance problems with variouse solutions.
+we can easily mitigate or eliminate performance problems with various solutions.
 But if you meet performance issues with narrow range of hot write dataset, it is not easy to deal with.
 
 Databse sharding or adoption of NOSQL could be one candidate solution, but 
