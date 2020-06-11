@@ -2,7 +2,7 @@
 ## Eliminating Database Hot Blocks with with Amazon ElastiCache ##
 
 
-The cache system occupies part of the modern web applications regardless of service scale.
+The cache system occupies part of the modern web applications regardless of the scale of services.
 As the number of users increases and various events are held to increase sales frequently,
 Many application services become to face critical performance problems, especially with database area.
 
