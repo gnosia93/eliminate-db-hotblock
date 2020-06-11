@@ -381,9 +381,11 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 ## BenchMarking Result ##
 
-We use two API server which instance type is m5d.large(2 vCPU, 9G RAM)
-and cache.m3.medium(3GB, Moderae Network Speed), 
-db.r5.large(2 vCPU, 16GB RAM)
+This benchmarking use follwing servers
+
+* Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
+* Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderae Network Speed), 
+* One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
 
 * Time taken for tests:   25.471 seconds  (left side senario, only use aurora rds)
