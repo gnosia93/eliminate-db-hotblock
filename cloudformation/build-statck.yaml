@@ -1,3 +1,6 @@
+
+AWSTemplateFormatVersion: 2010-09-09
+
 Description:  This template deploys a VPC, with a pair of public and private subnets spread
   across two Availability Zones. It deploys an internet gateway, with a default
   route on the public subnets. 
@@ -16,7 +19,6 @@ Parameters:
   KeyPair: 
     Description: Amazon EC2 Key Pair
     Type: AWS::EC2::KeyPair::KeyName
-    Default: keypair-tokyo
 
   WebNodeType:
     Description: The instance type the nodes will launch under.
@@ -423,7 +425,7 @@ Resources:
       VpcId: !Ref VPC
       HealthCheckIntervalSeconds: 30
       HealthCheckPath: /
-      HealthCheckPort: 80
+      HealthCheckPort: 8080
       HealthCheckProtocol: HTTP
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
