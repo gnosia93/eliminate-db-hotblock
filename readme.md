@@ -231,7 +231,7 @@ Now, our web site is working like below ..
 ![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
 
 
-## BenchMarking ##
+## BenchMark ##
 
 Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hypertext Transfer Protocol (HTTP) web server. Although it is designed to measure the performance of Apache web server, yet it can also be used to test any other web server that is equally good. With this tool, you can quickly know how many requests per second your web server is capable of serving.
 
@@ -366,7 +366,7 @@ Transfer rate:          60.43 [Kbytes/sec] received
 ```
 
 
-## BenchMarking Result ##
+## BenchMark Result ##
 
 This benchmarking use follwing test spec servers
 
