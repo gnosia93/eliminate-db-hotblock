@@ -1,25 +1,21 @@
+Below snippet is spring boot's OrderService class implementation.
+In a spring boot application, @Service Component is used transaction management object.
+Here, you are using eventSave(Order order) method call, in order to make method level transcation between aurora rds and redis cache cluster.
+
+In this example, when we call eventSave method, 
+if database is failed, and if addProductBuyCount (redis call) is failed, 
+Consitency between aurora rds and redis cluster is keeped..
+
 ```
 @Transactional
 @Service
 public class OrderService {
 
-    @Autowired OrderRepository orderRepository;
-    @Autowired ProductService productService;
-    @Autowired MemoryDBService memoryService;
-    @Autowired KafkaTemplate kafkaTemplate;
-
-    final static String KAFKA_TOPIC = "ocktank";
-
-
-    public Page<Order> findAll(Pageable page) {
-        Page<Order> retPage = orderRepository.findAll(page);
-        return retPage;
-    }
-
+    ...
+    
     public Optional<Order> findById(int id) {
         return orderRepository.findById(id);
     }
-
 
     public Order save(Order order) {
         productService.addBuyCount(order.getProductId());
@@ -47,5 +43,8 @@ public class OrderService {
 
         Order savedOrder = orderRepository.save(newOrder);
         return savedOrder;
+
     }
+    
+    ...
 ```
