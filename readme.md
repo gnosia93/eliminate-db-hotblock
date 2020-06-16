@@ -389,7 +389,9 @@ This performance comparison use follwing test spec servers
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
 
-Former graph case is DB only test case, later is test case with Amazone Elasticache.
+For clear performance comparison, here we are using three types of performance graph.
+First one is output of ab, second and third one came from cloud watch performance matrics.
+Left portion of graph is RDS only test case, right is case with Amazone Elasticache and RDS.
 
 
 #### [Test Result] ####
