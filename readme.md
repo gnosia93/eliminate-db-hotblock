@@ -83,7 +83,7 @@ $ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
 The authenticity of host 'your-api-instance-dnsname (your-api-ip)' can't be established.
 ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
 Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com,13.114.101.172' (ECDSA) to the list of known hosts.
+Warning: Permanently added 'your-api-instance-dnsname' (ECDSA) to the list of known hosts.
 
        __|  __|_  )
        _|  (     /   Amazon Linux 2 AMI
