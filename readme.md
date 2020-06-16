@@ -4,8 +4,7 @@
 
 Today Modern web applications are becoming more and more complex over time and are challenged by performance issues directly related to the user experience.  
 As the number of users increases and various events are held to make more sales revenues,
-Many applications are facing critical performance issues.   
-Among them, the database systems seems to be standing at the center of performance problems.
+Many applications are facing critical performance issues. Among them, the database systems seems to be standing at the center of performance problems.
 
 For normal heavy read or write bottleneck with wide range of items,
 we can easily mitigate or eliminate performance problems with various solutions.
