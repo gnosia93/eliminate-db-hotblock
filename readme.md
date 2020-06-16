@@ -25,7 +25,8 @@ If you are curious about detail code implementation, refer to code snippet about
 
 *Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
-So this could be insuitable for your business cases. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web service.* 
+So this could be insuitable for your business cases. 
+But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web service.* 
 
 
 ## Architecture ##
