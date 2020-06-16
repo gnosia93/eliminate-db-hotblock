@@ -55,6 +55,7 @@ public class OrderService {
         Order retOrder = doOrder(order);
         memoryService.addProductBuyCount(order.getProductId());
         return retOrder;
+
     }
 
     private Order doOrder(Order order) {
