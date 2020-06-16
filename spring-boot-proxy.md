@@ -2,9 +2,12 @@ Below snippet is spring boot's OrderService class implementation.
 In a spring boot application, @Service Component is used transaction management object.
 Here, you are using eventSave(Order order) method call, in order to make method level transcation between aurora rds and redis cache cluster.
 
-In this example, when we call eventSave method, 
-if database is failed, and if addProductBuyCount (redis call) is failed, 
-Consitency between aurora rds and redis cluster is keeped..
+In the case of database is failed, or redis update(addProductBuyCount) call is failed, 
+all operation is rollbacked and consitency between aurora rds and redis cluster is kept
+In fact, this is like a trick, because as you know database support transaction, but
+redis just support atomic operation not transaction.
+
+So we position redis call(addProductBuyCount) at the end of eventSave(Order order) method call.
 
 ```
 @Transactional
