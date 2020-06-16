@@ -51,8 +51,9 @@ public class OrderService {
     // OrderType 에 일반, 이벤트 등으로 나누는 것이 좋겠다.
     //
     public Order eventSave(Order order) {
-        memoryService.addProductBuyCount(order.getProductId());
+    //    memoryService.addProductBuyCount(order.getProductId());
         Order retOrder = doOrder(order);
+        memoryService.addProductBuyCount(order.getProductId());
         return retOrder;
     }
 
