@@ -424,12 +424,3 @@ in this architecture.
 I hope this architecture pattern help your business in the future.
 
 
-## Addtional Contents (Planned) ##
-
-- develop material in HA cases, how it works and how much time takes for completion of HA.
-
-- deep dive to spring boot implementaion for transaction processing between redis and rdbms.
-
-- cost comparison.
-
-- Consistency testing in the case of various Incident cases.
