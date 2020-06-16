@@ -117,7 +117,7 @@ spring.redis.host=<your-redis-cluster-endpoint>
 
 In this project, we are using Aurora MySQL datbase which has only primary node,
 and making database tables, procedure and buidling sample data of product table.
-Please execute a command like below at the ec2 instance console of either api server instances 
+Please execute following commands at a ec2 instance console of either api server instances 
 and you need to confirm product table's row count is 10000. 
 
 If you are good at MySQL database and compatibles, you can login Auroa RDS using mysql client and check sample schema,
