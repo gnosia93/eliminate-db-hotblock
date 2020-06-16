@@ -251,9 +251,9 @@ As shown above test architecture diagram, we have two kinds of test senario with
 In the left side senario, we only use aurora rds whenever new order happens.
 On the contrast, in the right side senario, we use both Amazon Elasticache and aurora rds.
 When new order is received, new order is inserted into aurora database table, 
-and update cache object value coresponding key (here, key is composed with new order's product number.)
+and update cache object value of coresponding key (here, key is composed with new order's product number.)
 
-There is two API endpoint url, /add is just only with rds, /event-add is working with both elasticach and rds for order processing.
+There is two API endpoint url, /add is just only working with rds, /event-add is working with both Elasticach and RDS for order processing.
 
 * /your-api-endpoint/order/add
 * /your-api-endpoint/order/event-add
@@ -292,10 +292,10 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-This is our benchmark test payload, default payload use productId 1004, other attributes is not import,
-If you want to change productId ordered, make sure corresponding productId exists in database,
+Below is our benchmark test payload, default payload use productId 1004, other attributes is not import,
+If you want to change productId, make sure corresponding productId exists in database,
 in default implementation, you can use productId between 1 to 10000. 
-And also both order-redis and order-db shell command use same payload.
+Both order-redis and order-db shell command use same payload.
 ```
 {
    "orderId": 0,
@@ -310,7 +310,7 @@ And also both order-redis and order-db shell command use same payload.
 ```
 
 After finishing setup order-db and order-redis shell, execute following command in order.
-Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
+Here, we execute order-db shell first and wait for roughly 10 sec.. in order to avoid RDS storage level interference.
 
 ```
 $ sh /order-db.sh 
