@@ -51,8 +51,9 @@ and Aurora database have two DB tables which name is product and order to handle
 
 ### Infra Provisioning with CloudFormation ###
 
-Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
+Here, we are going to use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
+(https://github.com/gnosia93/demo-cache/blob/master/cloudformation/build-statck.yaml)
 
 Go to AWS Cloudformation console, and build infrasture of this project with stack-build.yaml.
 Normally it takes about 10 minitues for all infra provisioning.
