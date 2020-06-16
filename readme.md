@@ -368,7 +368,7 @@ Transfer rate:          60.43 [Kbytes/sec] received
 
 ## BenchMark Result ##
 
-This benchmarking use follwing test spec servers
+This performance comparison use follwing test spec servers
 
 - Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
 - Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
