@@ -389,7 +389,8 @@ This performance comparison use follwing test spec servers
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
 
-For clear performance comparison, here we are using three types of performance graph. 
+For clear performance comparison, here we are using three types of performance graph.
+
 First one is output of ab, second and third one came from cloud watch performance matrics. 
 Left portion of graph is RDS only test case, right is case with both Amazone Elasticache and RDS.
 At the third, DML latency graph, you can find out there is no DML latency at right portion of graph.
