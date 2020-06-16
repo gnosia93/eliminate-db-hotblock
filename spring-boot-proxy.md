@@ -9,7 +9,9 @@ all operation is rollbacked and consitency between aurora rds and redis cluster 
 In fact, this is like a trick, because as you know database support transaction, but
 redis just support atomic operation not transaction.
 
-So we position redis call(addProductBuyCount) at the end of eventSave(Order order) method call.
+So we just position redis call(addProductBuyCount) at the end of eventSave(Order order) method call.
+If database error or fail is occured, exception throws before call to redis(addProductBuyCount) and database insert transaction is rollbacked.
+Simillary if redis call(addProductBuyCount) meet error condition, exception throws and database insert transaction is rollbacked. 
 
 ```
 @Transactional
