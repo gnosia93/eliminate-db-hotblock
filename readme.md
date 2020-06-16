@@ -1,46 +1,29 @@
 
-# Improving Appication Performance with AWS ElastiCache #
-
-Today's application is ... 
-
-현대의 웹어플리케이션은 복잡하고, 빠른 성능을 제공해야 하며, 이벤트시 몰려서 죽거나.. 한다.
-
-그래서 케시 시스템은 이러한 문제를 방지하기 위한 솔루션으로 자주 사용되어 지곤 한다..
+## Eliminating Database Hot Blocks with Amazon ElastiCache ##
 
 
-Cache system have some portion of large scale web application.
-Usually the common use case of cache system is divided into three category blows.  
+The cache system occupies part of the modern web applications regardless of the scale of services.    
+As the number of users increases and various events are held for enlarging sales revenues without any patterns frequently,
+Many application services become to face critical performance issues, especially in the area of database system.
 
-* DB Result Caching
-* Session Store 
-* Hot read with stale data
- 
-In this Scenario, I am going to share with you another use case of cache system for large scale web application
-having frequent update about specific data items, which is saved in rdbms. 
+For normal heavy read or write bottleneck with wide range of items,
+we can easily mitigate or eliminate performance problems with various solutions.
+But if you meet performance degrations with narrow range of hot write, it is not easy to deal with.  
+Databse sharding or adoption of NOSQL could be one candidate solution, but 
+What if the update is concentrated on one or two items,
+it become big service problem and eventually could be connected with your business risk. 
 
-~~ 쇼핑 컴퍼니, 주문 폭주, 이벤트 데이 주문 처리.. 수량 체크
-
-~~ 게시판 글수 카운트.
-
-~~ 특정 상품에 대한 실시간 판매 건수 계산.
-
-~~ wo
-
-케시를 사용하면 얼마나 빠르고, 비용효율적인를 보여주겠다..
-
-We are going to go through how to eliminate database hotblock with amazon elasticache redis and
-java spring boot web application.
-We don't deal with application implementation details in here, but If you are either developer or someone who can read
-java language, you can easily catch up with details.
+In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
+and demonstrate performance gain when you replace database update operation into redis key update.
 
 ### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
 For reducing database burden under a heavy transation environment, we just leverage java spring boot's proxy based transaction management which support transcations among different storage backend system(in this case between aurora rdbms and redis)*
 
-*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover is implemented with DNS level failover.
-When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod time(failover time).
-So this use case is not suitable for your application workload. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web scale services.* 
+*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level failover.
+When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
+So this could be insuitable for your business cases. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web service.* 
 
 
 ## Architecture ##
@@ -239,10 +222,9 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
-Now, our web page is working..
+Now, our web site is working..
 
-<< 첫화면 그림>>
-
+![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
 
 
 ## BenchMarking ##
@@ -252,45 +234,200 @@ Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hype
 If you want to find more detailed information about Apache Brench, please goto 
 https://www.tutorialspoint.com/apache_bench/apache_bench_overview.htm
 
+and you need to install ab to your computer.
+execute following command if operation system is Mac OS and have homebrew package manager.
+otherwise, refer Apache Bench site for installation. 
+```
+$ brew install httpd-tools
+```
 
 ![bench-arch](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-architecture.png)
 
 As shown above test architecture diagram, we have two kinds of test senario with ab.
 In the left side senario, we only use aurora rds whenever new order happens.
 On the contrast, in the right side senario, we use both Amazon Elasticache and aurora rds.
-When new order is received, new order database record is inserted into aurora database table, 
+When new order is received, new order is inserted into aurora database table, 
 and update cache object value coresponding key (here, key is composed with new order's product number.)
+
+There is two API endpoint url, /add is just only with rds, /event-add is working with both elasticach and rds for order processing.
+
+* /your-api-endpoint/order/add
+* /your-api-endpoint/order/event-add
+
 
 With ab, we will make order request from the our laptop. 
 Incurred workload's concurrency is 150 and total volume of request is 3000 per one trial.
 
-
-
-* AB 에 대한 간략한 설명 및 노트북 인스톨
-
-* json 데이터 설명, .sh 설명
-
-* 테스트 실행.
-
-- AB
+Go to benchmark sub directory under this project, check following information and replace `<your-api-endpoint>` to yours.
 
 ```
-$ yum install -y httpd-tools
+$ cd benchmark
+$ ls -la
+drwxr-xr-x   6 soonbeom  1896053708   192 Jun 11 02:35 .
+drwxr-xr-x  21 soonbeom  1896053708   672 Jun 11 02:30 ..
+-rwxr-xr-x   1 soonbeom  1896053708   215 Jun 11 02:35 order-db.sh
+-rw-r--r--   1 soonbeom  1896053708  1730 Jun  2 13:50 order-payload.csv
+-rw-r--r--   1 soonbeom  1896053708   176 Jun 11 02:31 order-payload.json
+-rw-r--r--   1 soonbeom  1896053708   221 Jun 11 02:35 order-redis.sh
+```
+
+[order-db.sh]
+```
+#!/bin/sh
+
+host=<your-api-endpoint>
+target=http://$host/order/add
+ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
+```
+[order-redis.sh]
+```
+#!/bin/sh
+
+host=<your-api-endpoint>
+target=http://$host/order//event-add
+ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
+```
+
+This is our benchmark test payload, default payload use productId 1004, other attributes is not import,
+If you want to change productId ordered, make sure corresponding productId exists in database,
+in default implementation, you can use productId between 1 to 10000. 
+And also both order-redis and order-db shell command use same payload.
+```
+{
+   "orderId": 0,
+   "productId": 1004,
+   "orderPrice": 1000,
+   "payStatus": null,
+   "orderDate": null,
+   "payDate": null,
+   "errorDate": null,
+   "errorMessage": null
+}
+```
+
+After finishing setup order-db and order-redis shell, execute following command in order.
+Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
+
+```
+$ sh /order-db.sh 
+
+#[wait about 10 sec]
+
+$ sh /order-redis.sh 
+```
+
+Below is execution output of ab. Time taken for tests value is total elapsed time since stress test started.
+Compare between order-db.sh and order-redis.sh ouput.
+
+```
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking cachedemo-api-alb-177367678.ap-northeast-1.elb.amazonaws.com (be patient)
+Completed 300 requests
+Completed 600 requests
+Completed 900 requests
+Completed 1200 requests
+Completed 1500 requests
+Completed 1800 requests
+Completed 2100 requests
+Completed 2400 requests
+Completed 2700 requests
+Completed 3000 requests
+Finished 3000 requests
+
+
+Server Software:        
+Server Hostname:        cachedemo-api-alb-177367678.ap-northeast-1.elb.amazonaws.com
+Server Port:            80
+
+Document Path:          /order/add
+Document Length:        Variable
+
+Concurrency Level:      150
+Time taken for tests:   25.471 seconds
+Complete requests:      3000
+Failed requests:        0
+Total transferred:      1576224 bytes
+Total body sent:        1143000
+HTML transferred:       994224 bytes
+Requests per second:    117.78 [#/sec] (mean)
+Time per request:       1273.557 [ms] (mean)
+Time per request:       8.490 [ms] (mean, across all concurrent requests)
+Transfer rate:          60.43 [Kbytes/sec] received
+                        43.82 kb/s sent
+                        104.25 kb/s total
 
 ```
 
-* /site-address/order/add
-* /site-address/order/event-add
 
-<< Performance Graph >>
+## BenchMarking Result ##
+
+This benchmarking use follwing test spec servers
+
+- Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
+- Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
+- One Node Aurora MySQL 5.6 which instance typs is db.r5.large(2 vCPU, 16GB RAM)
 
 
-### Addtional Contents (Planned) ##
+#### Elapsed Time ####
 
-- develop material in HA cases, how it works and how many times is required for completion of HA
+![benchmark-output](https://github.com/gnosia93/demo-cache/blob/master/document/benchmark-output.png)
+
+
+#### CPU Usage #### 
+
+![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-db-cpu.png)
+
+#### DML Latency ####
+
+![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
+
+
+Former graph case is DB only test case, later is test case with Amazone Elasticache.
+
+
+#### [Test Result] ####
+
+* Time taken for tests:   25.471 seconds  (left side senario, only aurora rds)
+* Time taken for tests:   5.861 seconds   (right side senario, both elasticache and aurora rds)
+
+
+**`As you can see from the test results, With Redis Benchmark result is about 4.3 times faster than DB only.`**
+
+Remeber that test result can be varied with difference ab parameter(total request and concurrency)
+and infra structure spec like rds VM size and IO capacity, and api server spec.
+If you need various test result, please do performance test with different configuration. 
+
+
+![web-product](https://github.com/gnosia93/demo-cache/blob/master/document/web-product.png)
+
+Upper screen shot is product web UI page of this project, go to your web site of this project,
+check web result page after executing your benchmark test.
+
+* [구매건수] : total order count of this product, which count is updated in dbms table. 
+
+* [이벤트구매건수] : total order count of this product, which count is updated with redis cache.
+
+
+
+
+
+## Conclusion ##
+
+So far, we've seen how to eliminate hot blocks from a database using Amazon Elasticache for redis.
+In addition to removing hot block contention from the database, as we saw earlier, there are other performance improvements
+in this architecture.  
+I hope this architecture pattern help your business in the future.
+
+
+## Addtional Contents (Planned) ##
+
+- develop material in HA cases, how it works and how much time takes for completion of HA.
 
 - deep dive to spring boot implementaion for transaction processing between redis and rdbms.
 
-- pricing comparison (Well Architected view)
+- cost comparison.
 
-- 일관성 테스트...
+- Consistency testing in the case of various Incident cases.
