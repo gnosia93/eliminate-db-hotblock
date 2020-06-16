@@ -73,7 +73,7 @@ we need to set up API server first before web server.
 ### Configure API Server ###
 
 In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database repectively. You have to bear in mind that we have two api server.
-Please refer following instruction to do your settings.
+so you need to configure both api servers. Please refer following instruction to do your settings.
 
 ```
 $ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
