@@ -13,7 +13,7 @@ Databse sharding or adoption of NOSQL could be one candidate solution, but
 What if the update is concentrated on one or two items,
 it become tremendous service problem and eventually could be connected with your business risk. 
 
-In this article, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
+In this post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
 and demonstrate performance gain when you replace database update operation into redis key update.
 
 ### *Disclaimer* ### 
