@@ -48,14 +48,14 @@ public class OrderService {
 
     }
 
-    // OrderType 에 일반, 이벤트 등으로 나누는 것이 좋겠다.
+    // when database error happens, this method made exception, there is no elasticache update
+    // and if cache service is down.. also this is no insert into database.
     //
     public Order eventSave(Order order) {
     //    memoryService.addProductBuyCount(order.getProductId());
         Order retOrder = doOrder(order);
         memoryService.addProductBuyCount(order.getProductId());
         return retOrder;
-
     }
 
     private Order doOrder(Order order) {
