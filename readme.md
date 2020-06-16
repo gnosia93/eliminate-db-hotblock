@@ -224,6 +224,8 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
+After successfully executing node.js web application with run.sh, goto web page with your web browser.
+You can confirm your web site url with outputs of cloudformation founded at stack menu. 
 Now, our web site is working like below ..
 
 ![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
