@@ -19,7 +19,9 @@ and demonstrate performance gain when you replace database update operation into
 ### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
-For reducing database burden under a heavy transation environment, we just leverage java spring boot's proxy based transaction management which support transcations among different storage backend system(in this case between aurora rdbms and redis)*
+For reducing database burden under a heavy transation environment, we just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
+If you are curious, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.
+(https://github.com/gnosia93/demo-cache/blob/master/spring-boot-proxy.md)*
 
 *Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
@@ -422,12 +424,3 @@ in this architecture.
 I hope this architecture pattern help your business in the future.
 
 
-## Addtional Contents (Planned) ##
-
-- develop material in HA cases, how it works and how much time takes for completion of HA.
-
-- deep dive to spring boot implementaion for transaction processing between redis and rdbms.
-
-- cost comparison.
-
-- Consistency testing in the case of various Incident cases.
