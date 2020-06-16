@@ -19,7 +19,7 @@ and demonstrate performance benefit when you replace database update operation b
 ### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
-For reducing database burden under a heavy transation environment, we just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
+For reducing database burden under a heavy transation environment, we are going to just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
 If you are curious, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.
 (https://github.com/gnosia93/demo-cache/blob/master/spring-boot-proxy.md)*
 
