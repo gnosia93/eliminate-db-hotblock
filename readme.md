@@ -20,7 +20,7 @@ and demonstrate performance gain when you replace database update operation into
 
 *This is just another applicable use case with Amazon Elasticache for redis.
 For reducing database burden under a heavy transation environment, we just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
-If you have any questions, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.*
+If you are curious, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.*
 
 *Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level failover.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
