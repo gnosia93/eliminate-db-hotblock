@@ -224,7 +224,7 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
-Now, our web site is working..
+Now, our web site is working like below ..
 
 ![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
 
