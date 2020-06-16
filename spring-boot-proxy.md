@@ -1,4 +1,4 @@
-## Spring Boot Transaction Managment Mechanism Between Auroa and Elasticache for Redis ##
+## Spring Boot Transaction Managment Between Auroa and Elasticache for Redis ##
 
 Below code snippet is spring boot's OrderService class implementation.
 In a spring boot application, @Service Component is used as transaction management object.
