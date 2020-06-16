@@ -1,8 +1,7 @@
 
 ## Eliminating Database Hot Blocks with Amazon ElastiCache ##
 
-
-Modern web applications are becoming more and more complex over time and are challenged by performance issues directly related to the user experience.  
+Modern web applications are getting more and more complex over the time and are challenged by performance issues directly related to the user experience.  
 As the number of users increases and various events are held to make more sales revenues,
 Many applications are facing critical performance issues. Among them, the database systems seems to be standing at the center of performance problems.
 
