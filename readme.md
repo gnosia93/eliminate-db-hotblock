@@ -1,31 +1,32 @@
 
 ## Eliminating Database Hot Blocks with Amazon ElastiCache ##
 
-
-The cache system occupies part of the modern web applications regardless of the scale of services.    
-As the number of users increases and various events are held for enlarging sales revenues without any patterns frequently,
-Many application services become to face critical performance issues, especially in the area of database system.
+Modern web applications are getting more and more complex over the time and are challenged by performance issues directly related to the user experience.  
+As the number of users increases and various events are held to make more sales revenues,
+Many applications are facing critical performance issues. Among them, the database systems seems to be standing at the center of performance problems.
 
 For normal heavy read or write bottleneck with wide range of items,
 we can easily mitigate or eliminate performance problems with various solutions.
 But if you meet performance degrations with narrow range of hot write, it is not easy to deal with.  
 Databse sharding or adoption of NOSQL could be one candidate solution, but 
 What if the update is concentrated on one or two items,
-it become big service problem and eventually could be connected with your business risk. 
+it become tremendous service problem and eventually could be connected with your business risk. 
 
-In this blog post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
-and demonstrate performance gain when you replace database update operation into redis key update.
+In this post, I wanna share with you how to eliminate database hot block with Amazon Elasticache,
+and demonstrate performance benefit when you replace database update operation by redis key update.
 
 ### *Disclaimer* ### 
 
 *This is just another applicable use case with Amazon Elasticache for redis.
-For reducing database burden under a heavy transation environment, we just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
-If you are curious, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.
+For reducing database burden under a heavy transation environment, we are going to just depend on java spring boot's transaction management which is implemeneted with proxy based transcations among different method call (in this case, insert call for aurora rds and update call for redis cache cluster). 
+If you are curious about detail code implementation, refer to code snippet about Spring Boot Transaction Managment Between Auroa and Elasticache for Redis.
 (https://github.com/gnosia93/demo-cache/blob/master/spring-boot-proxy.md)*
 
-*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level failover.
+*Tough Amazon elasticache for redis provide HA configuration and dramatic HA failover functionality, it's failover scheme is implemented with DNS level.
 When primary instnace is abnormaly shutdown or failed, service is not available for certiain priod of time(for failover time).
-So this could be insuitable for your business cases. But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web service.* 
+So this could be insuitable for your business cases.* 
+
+*But by walking throught this example, I am sure that you are able to get a good and new perspective about cache system like Amazon Elasticache when you are implementing scalable web service.* 
 
 
 ## Architecture ##
@@ -51,8 +52,9 @@ and Aurora database have two DB tables which name is product and order to handle
 
 ### Infra Provisioning with CloudFormation ###
 
-Here, we will use AWS cloudformation to automate painfull and error-prone infrastucture building. 
+Here, we are going to use AWS cloudformation to automate painfull and error-prone infrastucture building. 
 You can find cloudformation configuration file which name is stack-build.yaml in the subdirectory of this project.
+(https://github.com/gnosia93/demo-cache/blob/master/cloudformation/build-statck.yaml)
 
 Go to AWS Cloudformation console, and build infrasture of this project with stack-build.yaml.
 Normally it takes about 10 minitues for all infra provisioning.
@@ -66,14 +68,13 @@ You can easily identify web, api endpoint, and provisioned EC2 instances public 
 AuroraCluster and Redis URL is used at JAVA springboot application configuration.
 Both WebEndPoint and ApiEndPoint is load balancer url having public ip address, served at port 80.
 
-
-At the moment, web server has a dependancy with backend API sever, 
-we will set up API server first rather than web server.
+At the moment, web server has a dependancy on backend API sever, 
+we need to set up API server first before web server.
 
 ### Configure API Server ###
 
 In order to configure API server, log into your api-server with ssh or compatible ssh client and then set up your backend connection for both redis and aurora database repectively. You have to bear in mind that we have two api server.
-Please refer following instruction to do your settings.
+so you need to configure both api servers. Please refer following instruction to do your settings.
 
 ```
 $ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
@@ -81,7 +82,7 @@ $ ssh -i <your-pem-file> ec2-user@your-api-instance-dnsname
 The authenticity of host 'your-api-instance-dnsname (your-api-ip)' can't be established.
 ECDSA key fingerprint is SHA256:f1leNwUtSQdTwHqsusHlzEef812DWDtqgJ7oVwlUOzg.
 Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'ec2-13-114-101-172.ap-northeast-1.compute.amazonaws.com,13.114.101.172' (ECDSA) to the list of known hosts.
+Warning: Permanently added 'your-api-instance-dnsname' (ECDSA) to the list of known hosts.
 
        __|  __|_  )
        _|  (     /   Amazon Linux 2 AMI
@@ -117,7 +118,7 @@ spring.redis.host=<your-redis-cluster-endpoint>
 
 In this project, we are using Aurora MySQL datbase which has only primary node,
 and making database tables, procedure and buidling sample data of product table.
-Please execute a command like below at the ec2 instance console of either api server instances 
+Please execute following commands at a ec2 instance console of either api server instances 
 and you need to confirm product table's row count is 10000. 
 
 If you are good at MySQL database and compatibles, you can login Auroa RDS using mysql client and check sample schema,
@@ -177,7 +178,7 @@ Load balancing functionality is mandatory for next benchmark step.
 ![browser-output](https://github.com/gnosia93/demo-cache/blob/master/document/brower-ouput.png)
 
 
-like wise, if you don't watch output like above please check your configuration.
+If you can't watch output like above, please check your configuration again.
 
 
 ### Configure Web Server ###
@@ -224,12 +225,14 @@ $ npm audit fix
 $ sh run.sh 
 ```
 
-Now, our web site is working..
+After successfully executing node.js web application with run.sh, goto web page with your web browser.
+You can confirm your web site url with outputs of cloudformation founded at stack menu. 
+Now, our web site is working like below ..
 
 ![home](https://github.com/gnosia93/demo-cache/blob/master/document/home.png)
 
 
-## BenchMarking ##
+## BenchMark ##
 
 Apache Bench (ab) is a tool from the Apache organization for benchmarking a Hypertext Transfer Protocol (HTTP) web server. Although it is designed to measure the performance of Apache web server, yet it can also be used to test any other web server that is equally good. With this tool, you can quickly know how many requests per second your web server is capable of serving.
 
@@ -249,9 +252,9 @@ As shown above test architecture diagram, we have two kinds of test senario with
 In the left side senario, we only use aurora rds whenever new order happens.
 On the contrast, in the right side senario, we use both Amazon Elasticache and aurora rds.
 When new order is received, new order is inserted into aurora database table, 
-and update cache object value coresponding key (here, key is composed with new order's product number.)
+and update cache object value of coresponding key (here, key is composed with new order's product number.)
 
-There is two API endpoint url, /add is just only with rds, /event-add is working with both elasticach and rds for order processing.
+There is two API endpoint url, /add is just only working with rds, /event-add is working with both Elasticach and RDS for order processing.
 
 * /your-api-endpoint/order/add
 * /your-api-endpoint/order/event-add
@@ -290,10 +293,10 @@ target=http://$host/order//event-add
 ab -l -p order-payload.json -T 'application/json;charset=utf-8' -e order-payload.csv -c 150 -n 3000 $target
 ```
 
-This is our benchmark test payload, default payload use productId 1004, other attributes is not import,
-If you want to change productId ordered, make sure corresponding productId exists in database,
+Below is our benchmark test payload, default payload use productId 1004, other attributes is not import,
+If you want to change productId, make sure corresponding productId exists in database,
 in default implementation, you can use productId between 1 to 10000. 
-And also both order-redis and order-db shell command use same payload.
+Both order-redis and order-db shell command use same payload.
 ```
 {
    "orderId": 0,
@@ -308,7 +311,7 @@ And also both order-redis and order-db shell command use same payload.
 ```
 
 After finishing setup order-db and order-redis shell, execute following command in order.
-Here, we execute order-db shell first and wait more than 10 sec.. in order to avoid rds storage level interference.
+Here, we execute order-db shell first and wait for roughly 10 sec.. in order to avoid RDS storage level interference.
 
 ```
 $ sh /order-db.sh 
@@ -364,9 +367,9 @@ Transfer rate:          60.43 [Kbytes/sec] received
 ```
 
 
-## BenchMarking Result ##
+## BenchMark Result ##
 
-This benchmarking use follwing test spec servers
+This performance comparison use follwing test spec servers
 
 - Two API server which instance type is m5d.large(2 vCPU, 9G RAM)
 - Two Node Cache Cluster which instance typs is cache.m3.medium(3GB, Moderate Network Speed), 
@@ -387,7 +390,12 @@ This benchmarking use follwing test spec servers
 ![cpu](https://github.com/gnosia93/demo-cache/blob/master/document/cw-dml-latency.png)
 
 
-Former graph case is DB only test case, later is test case with Amazone Elasticache.
+For clear performance comparison, here we are using three types of performance graph.
+
+First one is output of ab, second and third one came from cloud watch performance matrics. 
+Left portion of graph is RDS only test case, right is case with both Amazone Elasticache and RDS.
+At the third, DML latency graph, you can find out there is no DML latency at right portion of graph.
+which mean that Amazon Elasticache help to remove database DML contention in other words database hot blocks.
 
 
 #### [Test Result] ####
@@ -421,6 +429,6 @@ check web result page after executing your benchmark test.
 So far, we've seen how to eliminate hot blocks from a database using Amazon Elasticache for redis.
 In addition to removing hot block contention from the database, as we saw earlier, there are other performance improvements
 in this architecture.  
-I hope this architecture pattern help your business in the future.
+I hope this architecture pattern help your services more scalable and more faster.
 
 
